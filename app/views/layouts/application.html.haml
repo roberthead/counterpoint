@@ -2,9 +2,15 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Counterpoint
+    %title
+      = t(:name, scope: [:site])
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = yield
+    .page__spread
+      = render partial: 'layouts/top_nav'
+      = render partial: 'layouts/messages', locals: {messages: flash}
+      %main.page__container--main
+        = yield

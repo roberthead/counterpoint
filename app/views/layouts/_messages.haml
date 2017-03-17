@@ -1,0 +1,6 @@
+- [:success, :info, :alert, :danger].each do |level|
+  - if messages[level].present?
+    .messages__section{class: "messages__section--#{level}", id: "messages__section--#{level}"}
+      - [messages[level]].flatten.each do |message|
+        .message
+          = message

@@ -1,0 +1,11 @@
+%nav.navbar.page__container
+  .navbar__container
+    .navbar__brand
+      = link_to(home_url, class: "navbar__brand-link") do
+        = t(:name, scope: [:site])
+    .navbar__menu
+      %ul.navbar__menu-list
+        %li.navbar__menu-list-item
+          = link_to_unless_current(t(:home, scope: [:navbar]), home_url, class: 'navbar__menu-link')
+        %li.navbar__menu-list-item
+          = link_to_unless_current(t(:about, scope: [:navbar]), about_url, class: 'navbar__menu-link')

@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  site:
+    name: "Juxtaposition"
+  navbar:
+    about: 'About'
+    home: 'Home'

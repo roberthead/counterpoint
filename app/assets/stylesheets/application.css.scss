@@ -1,0 +1,131 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+$width-mobile-portrait-max: 420px;
+$width-mobile-landscape-max: 736px;
+$width-tablet-portrait: 768px;
+$width-tablet-landscape: 1024px;
+$width-desktop-min: 1224px;
+$width-large-desktop-min: 1824px;
+
+$golden-ratio: 1.618;
+$font-medium: 16px;
+$font-small: $font-medium / $golden-ratio;
+$font-large: $font-medium * $golden-ratio;
+
+$font-family: "Avenir Next", "Avenir", -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+
+a {
+  font-family: $font-family;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.page {
+  &__spread {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: image_url('parchment.jpg');
+    background-size: cover;
+  }
+
+  &__container {
+    width: 100%;
+    margin: 0 auto;
+
+    &--main {
+      width: 100%;
+      margin: 2rem auto;
+    }
+  }
+}
+
+.navbar {
+  &__container {
+    display: flex;
+    background-color: rgba(64, 0, 0, 0.5);
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    color: white;
+    border-radius: 0 0 1rem 1rem;
+  }
+
+  &__brand {
+    flex: 1;
+    font-family: $font-family;
+    font-size: $font-large;
+    font-weight: 700;
+    line-height: 1.0;
+  }
+
+  &__brand-link {
+    color: #FFFFFF;
+  }
+
+  &__menu {
+    flex: 1;
+  }
+
+  &__menu-list {
+    display: flex;
+  }
+
+  &__menu-list-item {
+    flex: 1;
+    font-family: $font-family;
+    color: #FFFFFF;
+    font-size: $font-medium;
+    line-height: $font-large;
+
+  }
+
+  &__menu-link {
+    font-family: $font-family;
+    color: #FFFFFF;
+
+    &:hover {
+      color: #BBBBBB;
+    }
+
+    &:visited {
+      color: #DDDDDD;
+    }
+  }
+}
+
+@media only screen and (min-width: $width-tablet-portrait) {
+  .page {
+    &__container {
+      min-width: $width-tablet-portrait;
+      max-width: $width-tablet-landscape * 0.90;
+    }
+  }
+}
+
+@media only screen and (min-width: $width-tablet-landscape) {
+  .page {
+    &__container {
+      min-width: $width-tablet-landscape;
+      max-width: $width-desktop-min * 0.90;
+    }
+  }
+}
