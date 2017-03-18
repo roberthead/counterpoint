@@ -1,0 +1,31 @@
+.page__content
+  %h1
+    Compositions
+
+  - if @compositions.present?
+    %table.compositions
+      %thead
+        %tr
+          %td
+            Name
+          %td
+            Key Signature
+          %td
+            Meter
+          %td
+            &nbsp;
+      %tbody
+        - @compositions.each do |composition|
+          %tr
+            %td
+              = composition.name
+            %td
+              = composition.key_signature
+            %td
+              = composition.meter
+            %td
+              = link_to('Edit', edit_composition_path(composition))
+              = button_to 'Delete', composition_path(composition), method: :delete, data: {confirm: "Are you sure?"}
+
+  .actions
+    = link_to "New Composition", new_composition_path

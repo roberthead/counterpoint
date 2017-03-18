@@ -1,0 +1,135 @@
+@import "mui_custom_colors";
+
+$font-family: "Avenir Next", "Avenir", -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+
+$display-font-family: 'Cormorant Garamond', serif;
+
+$golden-ratio: 1.618;
+$golden-ratio-inverse: $golden-ratio - 1;
+$smaller-increment: $golden-ratio-inverse * $golden-ratio_inverse;
+
+$base-font-size: 16px;
+
+$font-size-sm: $base-font-size * (1 - $smaller-increment);
+$font-size-md: $base-font-size;
+$font-size-lg: $base-font-size * $golden-ratio;
+$font-size-xl: $base-font-size * $golden-ratio * $golden-ratio;
+$font-size-xxl: $base-font-size * $golden-ratio * $golden-ratio * $golden-ratio;
+
+$named-text-styles: (
+  "display4": (
+    "font-family": $display-font-family,
+    "font-size": $font-size-xl,
+    "line-height": $golden-ratio,
+    "font-weight": bold,
+    "font-style": normal,
+  ),
+
+  "display3": (
+    "font-family": $display-font-family,
+    "font-size": $font-size-lg,
+    "line-height": $golden-ratio,
+    "font-weight": normal,
+    "font-style": normal,
+  ),
+
+  "display2": (
+    "font-family": $display-font-family,
+    "font-size": $font-size-lg,
+    "line-height": $golden-ratio,
+    "font-weight": normal,
+    "font-style": italic,
+  ),
+
+  "display1": (
+    "font-family": $display-font-family,
+    "font-size": $font-size-lg,
+    "line-height": $golden-ratio,
+    "font-weight": bold,
+    "font-style": normal,
+  ),
+
+  "headline": (
+    "font-family": $display-font-family,
+    "font-size": $font-size-lg,
+    "line-height": $golden-ratio,
+    "font-weight": bold,
+    "font-style": normal,
+  ),
+
+  "title": (
+    "font-family": $font-family,
+    "font-size": $font-size-lg,
+    "line-height": $golden-ratio,
+    "font-weight": normal,
+    "font-style": normal,
+  ),
+
+  "subhead": (
+    "font-family": $font-family,
+    "font-size": $font-size-md,
+    "line-height": $golden-ratio,
+    "font-weight": 500,
+    "font-style": normal,
+  ),
+
+  "body2": (
+    "font-family": $font-family,
+    "font-size": $font-size-md,
+    "line-height": $golden-ratio,
+    "font-weight": 400,
+    "font-style": normal,
+  ),
+
+  "body1": (
+    "font-family": $font-family,
+    "font-size": $font-size-md,
+    "line-height": normal,
+    "font-weight": normal,
+    "font-style": normal,
+  ),
+
+  "caption": (
+    "font-family": $font-family,
+    "font-size": $font-size-md,
+    "line-height": $golden-ratio,
+    "font-weight": normal,
+    "font-style": normal,
+  ),
+
+  "menu": (
+    "font-family": $font-family,
+    "font-size": $font-size-md,
+    "line-height": normal,
+    "font-weight": 500,
+    "font-style": normal,
+  ),
+
+  "button": (
+    "font-family": $font-family,
+    "font-size": $font-size-md,
+    "line-height": normal,
+    "font-weight": 600,
+    "font-style": normal,
+  )
+);
+
+@mixin mui-text($mui-name) {
+  $mui-styles: map-get($named-text-styles, $mui-name);
+
+  color: map-get($mui-styles, "color");
+  font-family: map-get($mui-styles, "font-family");
+  font-size: map-get($mui-styles, "font-size");
+  line-height: map-get($mui-styles, "line-height");
+  font-weight: map-get($mui-styles, "font-weight");
+  font-style: map-get($mui-styles, "font-style");
+}
+
+
+$list: display4 display3 display2 display1 headline title subhead body2 body1 caption menu button;
+
+@each $text-style in $list {
+  .text-#{$text-style} {
+    @include mui-text($text-style);
+  }
+}

@@ -1,0 +1,8 @@
+.style-guide__chip-chart
+  %h3.style-guide__chip-chart-header{class: "style-guide__chip-chart-header--#{color}"}
+    = color
+  %ul.style-guide__chip-list
+    - [50, 100, 200, 300, 400, 500, 600, 700, 800, 900].each do |contrast|
+      %li{:class => "style-guide__chip style-guide__chip--#{color}-#{contrast}"}
+        = color
+        = contrast

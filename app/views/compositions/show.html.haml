@@ -1,0 +1,18 @@
+.page__content
+  %h1
+    Composition
+
+  .div
+    name:
+    = @composition.name
+
+  .div
+    key_signature:
+    = @composition.key_signature
+
+  .div
+    meter:
+    = @composition.meter
+
+  = link_to 'Edit', edit_composition_path(@composition)
+  = button_to 'Delete', composition_path(@composition), method: :delete, data: {confirm: "Are you sure?"}

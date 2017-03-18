@@ -1,18 +1,5 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+@import "mui";
+@import "style_guide";
 
 $width-mobile-portrait-max: 420px;
 $width-mobile-landscape-max: 736px;
@@ -22,18 +9,57 @@ $width-desktop-min: 1224px;
 $width-large-desktop-min: 1824px;
 
 $golden-ratio: 1.618;
-$font-medium: 16px;
-$font-small: $font-medium / $golden-ratio;
-$font-large: $font-medium * $golden-ratio;
+$golden-ratio-inverse: $golden-ratio - 1;
+
+$font-size-md: 16px;
+$font-size-sm: $font-size-md / $golden-ratio;
+$font-size-lg: $font-size-md * $golden-ratio;
+$font-size-xl: $font-size-lg * $golden-ratio;
 
 $font-family: "Avenir Next", "Avenir", -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
 
-a {
-  font-family: $font-family;
-  text-decoration: none;
+html {
+  font-size: $font-size-md;
+}
 
-  &:hover {
-    text-decoration: underline;
+body {
+  background: #DDD;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#juxtacompose {
+  a {
+    font-family: $font-family;
+    text-decoration: none;
+    color: #000000;
+
+    &:hover {
+      text-decoration: underline;
+      color: #888888;
+    }
+
+    &:visited {
+      color: inherit;
+    }
+  }
+
+  h1 {
+    font-size: $font-size-xl;
+    line-height: $golden-ratio;
+  }
+
+  p {
+    line-height: $golden-ratio !important;
+  }
+
+  thead td {
+    font-weight: bold;
+  }
+  td {
+    padding: 0.5rem 1rem 0.5rem 0;
   }
 }
 
@@ -54,26 +80,38 @@ a {
 
     &--main {
       width: 100%;
-      margin: 2rem auto;
+      margin: 1rem auto;
     }
+  }
+
+  &__content {
+    margin: 1rem 0;
+    padding: 1rem;
+    min-height: 50vh;
+    background-color: rgba(255, 255, 255, $golden-ratio-inverse);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 1rem;
+    font-family: $font-family;
   }
 }
 
 .navbar {
   &__container {
     display: flex;
-    background-color: rgba(64, 0, 0, 0.5);
+    background-color: rgba(64, 0, 0, $golden-ratio-inverse);
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1rem;
     color: white;
+    border: 2px solid rgba(64, 0, 0, 0.618);
+    border-top-width: 0;
     border-radius: 0 0 1rem 1rem;
   }
 
   &__brand {
     flex: 1;
     font-family: $font-family;
-    font-size: $font-large;
-    font-weight: 700;
+    font-size: $font-size-lg;
+    font-weight: 500;
     line-height: 1.0;
   }
 
@@ -93,22 +131,33 @@ a {
     flex: 1;
     font-family: $font-family;
     color: #FFFFFF;
-    font-size: $font-medium;
-    line-height: $font-large;
-
+    font-size: $font-size-md;
+    line-height: $font-size-lg;
+    text-align: center;
   }
 
   &__menu-link {
     font-family: $font-family;
     color: #FFFFFF;
+    font-weight: 400;
 
     &:hover {
       color: #BBBBBB;
     }
 
     &:visited {
-      color: #DDDDDD;
+      color: #FFFFFF;
     }
+  }
+}
+
+.application {
+  &__container {
+    margin: 1rem 0;
+    padding: 1rem;
+    height: 80vh;
+    background-color: rgba(255, 255, 255, $golden-ratio-inverse);
+    border-radius: 1rem;
   }
 }
 
@@ -122,6 +171,12 @@ a {
 }
 
 @media only screen and (min-width: $width-tablet-landscape) {
+  .application {
+    &__container {
+      margin: 1rem;
+    }
+  }
+
   .page {
     &__container {
       min-width: $width-tablet-landscape;

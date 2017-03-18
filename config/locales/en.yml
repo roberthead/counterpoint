@@ -30,9 +30,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: Hello world
   site:
-    name: "Juxtaposition"
+    name: Juxtacompose
   navbar:
-    about: 'About'
-    home: 'Home'
+    about: About
+    compositions: Compositions
+    home: Home

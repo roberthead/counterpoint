@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.5'
+gem 'mui-sass'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.0.beta1'
@@ -22,4 +23,8 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+end
+
+group :test do
+  gem 'shoulda-matchers'
 end

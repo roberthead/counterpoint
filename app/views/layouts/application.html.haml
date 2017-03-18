@@ -5,12 +5,13 @@
     %title
       = t(:name, scope: [:site])
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = stylesheet_link_tag "https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  %body
+    :css
+      @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond');
+  %body#juxtacompose
     .page__spread
       = render partial: 'layouts/top_nav'
       = render partial: 'layouts/messages', locals: {messages: flash}
-      %main.page__container--main
+      %main.page__container.page__container--main
         = yield

@@ -1,0 +1,13 @@
+= form_for composition, class: 'composition-form' do |f|
+  .composition-form__field.composition-form__field--name
+    = f.label :name
+    = f.text_field :name
+  .composition-form__field.composition-form__field--name
+    = f.label :key_signature
+    = f.text_field :key_signature
+  .composition-form__field.composition-form__field--name
+    = f.label :meter
+    = f.text_field :meter
+  .composition-form__submit
+    = f.submit 'Save'
+    = link_to('Cancel', compositions_path)

@@ -1,0 +1,70 @@
+.style-guide {
+  &__container {
+    @extend .mui-container;
+
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    background-color: $mui-body-bg-color;
+
+    &:first-child {
+      border-top-left-radius: 1rem;
+      border-top-right-radius: 1rem;
+      margin-top: 1rem;
+      padding-top: 2rem;
+    };
+
+    &:last-child {
+      border-bottom-left-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 2rem;
+    };
+
+    &--on-dark {
+      background-color: $mui-appbar-bg-color;
+    }
+
+    &--colors {
+      display: flex;
+      flex-basis: 20rem;
+    }
+  }
+
+  &__typography {
+    margin-bottom: 2em 0;
+  }
+
+  &__colors {
+    margin-bottom: 2em 0;
+  }
+
+  &__chip-chart {
+    flex: 1;
+  }
+
+  &__chip-chart-header {
+    padding: 1rem;
+    margin: 0;
+    color: mui-color("white");
+
+    @each $color, $value in $mui-colors {
+      &--#{$color} { background-color: mui-color($color); }
+    }
+  }
+
+  &__chip-list {
+    padding-left: 0;
+  }
+
+  &__chip {
+    padding: 1rem;
+
+    @each $color, $values in $mui-colors {
+      @if type-of($values) == 'map' {
+        @each $step, $value in $values {
+          &--#{$color}-#{$step} { background-color: $value; }
+        }
+      }
+    }
+  }
+}
