@@ -4,7 +4,7 @@ class CompositionsController < ApplicationController
   end
 
   def new
-    @composition = Composition.new(name: 'Counterpoint', key_signature: 'C major', meter: '4/4')
+    @composition = Composition.new(name: 'Counterpoint', key: 'C major', meter: '4/4')
   end
 
   def create
@@ -39,6 +39,6 @@ class CompositionsController < ApplicationController
   private
 
   def composition_params
-    params.require(:composition).permit(:name, :key_signature, :meter)
+    params.require(:composition).permit(:name, :key, :meter)
   end
 end
