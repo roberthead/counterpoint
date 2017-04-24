@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: compositions
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  key        :string
+#  meter      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Composition < ApplicationRecord
   validates :name, presence: true
   validates :key, presence: true
