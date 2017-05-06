@@ -5,8 +5,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'mui-sass'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
-gem 'rails', '~> 5.1.0.beta1'
-gem 'sass-rails', github: "rails/sass-rails"
+gem 'rails', '~> 5.1.0'
+gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'uglifier', '>= 1.3.0'
