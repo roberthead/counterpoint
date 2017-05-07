@@ -1,8 +1,7 @@
 .page__content
-  %h1
-    Welcome
-  %p
-    Juxtacompose is an application for live analysis of counterpoint.
-
+  %h2.welcome-header
+    = t('.welcome_header')
+  %p.welcome-message
+    = t('.welcome_message')
   %p.call-to-action
-    = link_to("Get Started", compositions_path)
+    = link_to(t('.call_to_action'), sandbox_path)

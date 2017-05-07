@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_identity
-    @current_identity ||= Identity.find(session[:identity_id]) if session[:identity_id]
+    @current_identity ||= Identity.find_by(id: session[:identity_id]) if session[:identity_id]
   end
 end
