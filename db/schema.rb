@@ -10,22 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424030922) do
+ActiveRecord::Schema.define(version: 20170507142309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "compositions", force: :cascade do |t|
-    t.string "name"
-    t.string "key"
-    t.string "meter"
+    t.string "name", null: false
+    t.string "key", default: "C major", null: false
+    t.string "meter", default: "4/4", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "identity_id", null: false
+    t.index ["identity_id"], name: "index_compositions_on_identity_id"
+  end
+
+  create_table "identities", force: :cascade do |t|
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.string "name", default: ""
+    t.string "oauth_token", null: false
+    t.datetime "oauth_expires_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "notes", force: :cascade do |t|
-    t.bigint "voice_id"
-    t.integer "bar"
+    t.bigint "voice_id", null: false
+    t.integer "bar", default: 1, null: false
     t.string "pitch"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -33,15 +45,16 @@ ActiveRecord::Schema.define(version: 20170424030922) do
   end
 
   create_table "voices", force: :cascade do |t|
-    t.bigint "composition_id"
-    t.integer "vertical_position"
-    t.boolean "cantus_firmus"
-    t.string "clef"
+    t.bigint "composition_id", null: false
+    t.integer "vertical_position", default: 1, null: false
+    t.boolean "cantus_firmus", default: false, null: false
+    t.string "clef", default: "treble", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["composition_id"], name: "index_voices_on_composition_id"
   end
 
+  add_foreign_key "compositions", "identities"
   add_foreign_key "notes", "voices"
   add_foreign_key "voices", "compositions"
 end

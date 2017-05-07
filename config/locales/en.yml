@@ -30,10 +30,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: Hello world
+  layouts:
+    top_nav:
+      about: About
+      compositions: Compositions
+      home: Home
+      sign_in: Sign in
+      sign_out: Sign out %{name}
   site:
     name: Juxtacompose
-  top_nav:
-    about: About
-    compositions: Compositions
-    home: Home

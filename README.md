@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+I followed these instructions to create Google oauth
+https://richonrails.com/articles/google-authentication-in-ruby-on-rails/

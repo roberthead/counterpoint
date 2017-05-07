@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CompositionsController, type: :controller do
-
+RSpec.xdescribe CompositionsController, type: :controller do
   describe "GET #new" do
     it "returns http success" do
       get :new

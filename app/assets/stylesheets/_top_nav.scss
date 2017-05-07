@@ -19,6 +19,7 @@
   &__brand-link {
     @include mui-text("display1");
     line-height: 2.0;
+    color: mui-color("white");
   }
 
   &__menu-list {
@@ -37,6 +38,10 @@
     line-height: 2.0;
     margin: 0;
     vertical-align: middle;
+  }
+
+  &__menu-link {
+    color: mui-color("white");
   }
 }
 
