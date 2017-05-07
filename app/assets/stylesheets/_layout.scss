@@ -75,16 +75,6 @@ ul {
   }
 }
 
-.application {
-  &__container {
-    margin: 1rem 0;
-    padding: 1rem;
-    height: 80vh;
-    background-color: rgba(255, 255, 255, $phi-a);
-    border-radius: 1rem;
-  }
-}
-
 @media only screen and (min-width: $width-tablet-portrait) {
   .page {
     &__container {
@@ -95,12 +85,6 @@ ul {
 }
 
 @media only screen and (min-width: $width-tablet-landscape) {
-  .application {
-    &__container {
-      margin: 1rem;
-    }
-  }
-
   .page {
     &__container {
       min-width: $width-tablet-landscape;
