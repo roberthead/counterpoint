@@ -1,21 +1,15 @@
 @import "mui_custom_colors";
 
+// Variables
+
 $font-family: "Avenir Next", "Avenir", -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
 
 $display-font-family: 'Cormorant Garamond', serif;
+$base-font-size: 16px;
 
 $phi: 1.618034;
-
-$phi-a: 1 / $phi;
-// 0.618034
-// also computable as: $phi - 1
-
-$phi-b: 1 - $phi-a;
-// 0.381966
-// also computable as: $phi-a * $phi-a
-
-
-$base-font-size: 16px;
+$phi-a: 1 / $phi; // 0.618034, also computable as: $phi - 1
+$phi-b: 1 - $phi-a; // 0.381966, also computable as: $phi-a * $phi-a
 
 $font-size-sm: $base-font-size * $phi-a;
 $font-size-md: $base-font-size;
