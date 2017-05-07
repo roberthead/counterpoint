@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resource :style_guide, only: [:show]
   resource :about, only: [:show]
 
-  resources :compositions
+  resources :compositions do
+    resource :editor, only: [:show]
+  end
 
   root to: 'homes#show'
 end
