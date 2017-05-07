@@ -1,16 +1,17 @@
 source 'https://rubygems.org'
 
+gem 'rails', '~> 5.1.0'
+gem 'pg', '~> 0.18'
+gem 'puma', '~> 3.7'
+
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'mui-sass'
-gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.7'
-gem 'rails', '~> 5.1.0'
+gem 'omniauth-google-oauth2', '~> 0.2.1'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'uglifier', '>= 1.3.0'
-gem "omniauth-google-oauth2", "~> 0.2.1"
 
 group :development do
   gem 'annotate'
@@ -22,9 +23,9 @@ group :development do
 end
 
 group :development, :test do
-  gem 'dotenv-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.7.0'
+  gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
