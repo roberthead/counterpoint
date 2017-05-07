@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
   def current_identity
     @current_identity ||= Identity.find_by(id: session[:identity_id]) if session[:identity_id]
   end
+
+  def ensure_authentication!
+    redirect_to '/auth/google_oauth2' if current_identity.nil?
+  end
 end
