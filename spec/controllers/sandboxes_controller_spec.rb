@@ -10,11 +10,31 @@ RSpec.describe SandboxesController, type: :controller do
     end
 
     context 'when an identity is signed in' do
-      let(:identity) { FactoryGirl.create(:identity) }
+      let(:identity) { FactoryGirl.create(:identity, name: "Sarah O'Reilly") }
+
+      def make_request(identity_id)
+        get :show, params: {}, session: {identity_id: identity_id}
+      end
 
       it 'responds successfully' do
-        get :show, params: {}, session: {identity_id: identity.id}
+        make_request(identity.id)
         expect(response).to be_success
+      end
+
+      context 'and that identity does not have an existing composition' do
+        it 'creates a new composition' do
+          make_request(identity.id)
+          expect(assigns(:composition).name).to eq "Sarah O'Reilly's Counterpoint"
+        end
+      end
+
+      context 'and that identity has an existing composition' do
+        let!(:composition) { FactoryGirl.create(:composition, identity: identity) }
+
+        it 'assigns that composition' do
+          make_request(identity.id)
+          expect(assigns(:composition)).to eq composition
+        end
       end
     end
   end

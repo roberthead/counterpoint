@@ -18,6 +18,8 @@ class Identity < ApplicationRecord
   validates :oauth_token, presence: true
   validates :oauth_expires_at, presence: true
 
+  has_one :composition, -> { order 'updated_at DESC' }, inverse_of: :identity
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |identity|
       identity.provider = auth.provider

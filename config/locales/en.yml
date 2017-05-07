@@ -1,4 +1,6 @@
 en:
+  compositions:
+    default_name: "%{user_name}'s Counterpoint"
   homes:
     show:
       welcome_header: Welcome!

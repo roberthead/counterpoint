@@ -19,4 +19,6 @@ RSpec.describe Identity, type: :model do
   it { is_expected.to validate_presence_of(:uid) }
   it { is_expected.to validate_presence_of(:oauth_token) }
   it { is_expected.to validate_presence_of(:oauth_expires_at) }
+
+  it { is_expected.to have_one(:composition) }
 end
