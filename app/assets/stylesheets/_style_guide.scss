@@ -1,7 +1,5 @@
 .style-guide {
   &__container {
-    @extend .mui-container;
-
     margin: 0 auto;
     padding: 1rem 2rem;
     background-color: $mui-body-bg-color;

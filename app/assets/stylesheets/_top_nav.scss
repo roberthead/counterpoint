@@ -1,55 +1,52 @@
 .top-nav {
-  &__container {
-    display: flex;
-    background-color: rgba(64, 0, 0, $phi-a);
-    margin: 0 auto;
-    padding: 1rem;
-    color: white;
-    border: 2px solid rgba(64, 0, 0, 0.618);
-    border-top-width: 0;
-    border-radius: 0 0 1rem 1rem;
+  &__spread {
+    background-color: mui-color("blue");
+    width: 100%;
   }
 
-  &__brand {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    color: mui-color("white");
+    text-align: center;
+  }
+
+  &__content {
     flex: 1;
-    font-family: $font-family;
-    font-size: $font-size-lg;
-    font-weight: 500;
-    line-height: 1.0;
   }
 
   &__brand-link {
-    color: #FFFFFF;
-  }
-
-  &__menu {
-    flex: 1;
+    @include mui-text("display1");
+    line-height: 2.0;
   }
 
   &__menu-list {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   &__menu-list-item {
+    @include mui-text("menu");
     flex: 1;
-    font-family: $font-family;
-    color: #FFFFFF;
-    font-size: $font-size-md;
-    line-height: $font-size-lg;
     text-align: center;
+    line-height: 2.0;
+    margin: 0;
+    vertical-align: middle;
   }
+}
 
-  &__menu-link {
-    font-family: $font-family;
-    color: #FFFFFF;
-    font-weight: 400;
 
-    &:hover {
-      color: #BBBBBB;
-    }
-
-    &:visited {
-      color: #FFFFFF;
+@media only screen and (min-width: $width-tablet-portrait) {
+  .top-nav {
+    &__container {
+      flex-direction: row;
+      align-items: center;
+      text-align: left;
     }
   }
 }

@@ -5,7 +5,7 @@
 $font-family: "Avenir Next", "Avenir", -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
 
 $display-font-family: 'Cormorant Garamond', serif;
-$base-font-size: 16px;
+$base-font-size: 16pt;
 
 $phi: 1.618034;
 $phi-a: 1 / $phi; // 0.618034, also computable as: $phi - 1
@@ -21,95 +21,95 @@ $named-text-styles: (
   "display4": (
     "font-family": $display-font-family,
     "font-size": $font-size-xl,
-    "line-height": $phi,
-    "font-weight": bold,
     "font-style": normal,
+    "font-weight": bold,
+    "line-height": $phi,
   ),
 
   "display3": (
     "font-family": $display-font-family,
     "font-size": $font-size-lg,
-    "line-height": $phi,
-    "font-weight": normal,
     "font-style": normal,
+    "font-weight": normal,
+    "line-height": $phi,
   ),
 
   "display2": (
     "font-family": $display-font-family,
     "font-size": $font-size-lg,
-    "line-height": $phi,
-    "font-weight": normal,
     "font-style": italic,
+    "font-weight": normal,
+    "line-height": $phi,
   ),
 
   "display1": (
     "font-family": $display-font-family,
     "font-size": $font-size-lg,
-    "line-height": $phi,
-    "font-weight": bold,
     "font-style": normal,
+    "font-weight": bold,
+    "line-height": $phi,
   ),
 
   "headline": (
     "font-family": $display-font-family,
     "font-size": $font-size-lg,
-    "line-height": $phi,
-    "font-weight": bold,
     "font-style": normal,
+    "font-weight": bold,
+    "line-height": $phi,
   ),
 
   "title": (
     "font-family": $font-family,
     "font-size": $font-size-lg,
-    "line-height": $phi,
-    "font-weight": normal,
     "font-style": normal,
+    "font-weight": normal,
+    "line-height": $phi,
   ),
 
   "subhead": (
     "font-family": $font-family,
     "font-size": $font-size-md,
-    "line-height": $phi,
-    "font-weight": 500,
     "font-style": normal,
+    "font-weight": 500,
+    "line-height": $phi,
   ),
 
   "body2": (
     "font-family": $font-family,
     "font-size": $font-size-md,
-    "line-height": $phi,
-    "font-weight": 400,
     "font-style": normal,
+    "font-weight": 400,
+    "line-height": $phi,
   ),
 
   "body1": (
     "font-family": $font-family,
     "font-size": $font-size-md,
-    "line-height": normal,
-    "font-weight": normal,
     "font-style": normal,
+    "font-weight": normal,
+    "line-height": normal,
   ),
 
   "caption": (
     "font-family": $font-family,
     "font-size": $font-size-md,
-    "line-height": $phi,
-    "font-weight": normal,
     "font-style": normal,
+    "font-weight": normal,
+    "line-height": $phi,
   ),
 
   "menu": (
+    "line-height": normal,
     "font-family": $font-family,
     "font-size": $font-size-md,
-    "line-height": normal,
     "font-weight": 500,
     "font-style": normal,
   ),
 
   "button": (
+    "line-height": normal,
     "font-family": $font-family,
     "font-size": $font-size-md,
-    "line-height": normal,
     "font-weight": 600,
     "font-style": normal,
   )
@@ -118,14 +118,12 @@ $named-text-styles: (
 @mixin mui-text($mui-name) {
   $mui-styles: map-get($named-text-styles, $mui-name);
 
-  color: map-get($mui-styles, "color");
+  line-height: map-get($mui-styles, "line-height");
   font-family: map-get($mui-styles, "font-family");
   font-size: map-get($mui-styles, "font-size");
-  line-height: map-get($mui-styles, "line-height");
   font-weight: map-get($mui-styles, "font-weight");
   font-style: map-get($mui-styles, "font-style");
 }
-
 
 $list: display4 display3 display2 display1 headline title subhead body2 body1 caption menu button;
 

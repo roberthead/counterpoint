@@ -1,13 +1,14 @@
-%nav.top-nav.page__container
-  .top-nav__container
-    .top-nav__brand
-      = link_to(home_path, class: "top-nav__brand-link") do
-        = t(:name, scope: [:site])
-    .top-nav__menu
-      %ul.top-nav__menu-list
-        %li.top-nav__menu-list-item
-          = link_to_unless_current(t(:home, scope: [:top_nav]), home_path, class: 'top-nav__menu-link')
-        %li.top-nav__menu-list-item
-          = link_to_unless_current(t(:compositions, scope: [:top_nav]), compositions_path, class: 'top-nav__menu-link')
-        %li.top-nav__menu-list-item
-          = link_to_unless_current(t(:about, scope: [:top_nav]), about_path, class: 'top-nav__menu-link')
+%nav.top-nav
+  .top-nav__spread
+    .top-nav__container.page__container
+      .top-nav__content.top-nav__content--brand
+        = link_to(home_path, class: "top-nav__brand-link") do
+          = t(:name, scope: [:site])
+      .top-nav__content.top-nav__content--menu
+        %ul.top-nav__menu-list
+          %li.top-nav__menu-list-item
+            = link_to_unless_current(t(:home, scope: [:top_nav]), home_path, class: 'top-nav__menu-link')
+          %li.top-nav__menu-list-item
+            = link_to_unless_current(t(:compositions, scope: [:top_nav]), compositions_path, class: 'top-nav__menu-link')
+          %li.top-nav__menu-list-item
+            = link_to_unless_current(t(:about, scope: [:top_nav]), about_path, class: 'top-nav__menu-link')
