@@ -18,7 +18,7 @@ RSpec.describe Composition, type: :model do
   it { is_expected.to have_many(:voices) }
 
   describe 'default values' do
-    let(:composition) { Composition.new(name: 'Fruit Salad') }
+    let(:composition) { Composition.new }
 
     it 'defaults key to C major' do
       expect {
@@ -34,6 +34,18 @@ RSpec.describe Composition, type: :model do
       }.to change {
         composition.meter
       }.from(nil).to('4/4')
+    end
+  end
+
+  describe 'validation lifecycle' do
+    let(:composition) { Composition.new }
+
+    it 'ensures a cantus firmus' do
+      expect {
+        composition.valid?
+      }.to change {
+        composition.cantus_firmus.present?
+      }.to true
     end
   end
 end
