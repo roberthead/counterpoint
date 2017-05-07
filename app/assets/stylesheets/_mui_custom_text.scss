@@ -4,23 +4,30 @@ $font-family: "Avenir Next", "Avenir", -apple-system, ".SFNSText-Regular", "San 
 
 $display-font-family: 'Cormorant Garamond', serif;
 
-$golden-ratio: 1.618;
-$golden-ratio-inverse: $golden-ratio - 1;
-$smaller-increment: $golden-ratio-inverse * $golden-ratio_inverse;
+$phi: 1.618034;
+
+$phi-a: 1 / $phi;
+// 0.618034
+// also computable as: $phi - 1
+
+$phi-b: 1 - $phi-a;
+// 0.381966
+// also computable as: $phi-a * $phi-a
+
 
 $base-font-size: 16px;
 
-$font-size-sm: $base-font-size * (1 - $smaller-increment);
+$font-size-sm: $base-font-size * $phi-a;
 $font-size-md: $base-font-size;
-$font-size-lg: $base-font-size * $golden-ratio;
-$font-size-xl: $base-font-size * $golden-ratio * $golden-ratio;
-$font-size-xxl: $base-font-size * $golden-ratio * $golden-ratio * $golden-ratio;
+$font-size-lg: $base-font-size * $phi;
+$font-size-xl: $base-font-size * $phi * $phi;
+$font-size-xxl: $base-font-size * $phi * $phi * $phi;
 
 $named-text-styles: (
   "display4": (
     "font-family": $display-font-family,
     "font-size": $font-size-xl,
-    "line-height": $golden-ratio,
+    "line-height": $phi,
     "font-weight": bold,
     "font-style": normal,
   ),
@@ -28,7 +35,7 @@ $named-text-styles: (
   "display3": (
     "font-family": $display-font-family,
     "font-size": $font-size-lg,
-    "line-height": $golden-ratio,
+    "line-height": $phi,
     "font-weight": normal,
     "font-style": normal,
   ),
@@ -36,7 +43,7 @@ $named-text-styles: (
   "display2": (
     "font-family": $display-font-family,
     "font-size": $font-size-lg,
-    "line-height": $golden-ratio,
+    "line-height": $phi,
     "font-weight": normal,
     "font-style": italic,
   ),
@@ -44,7 +51,7 @@ $named-text-styles: (
   "display1": (
     "font-family": $display-font-family,
     "font-size": $font-size-lg,
-    "line-height": $golden-ratio,
+    "line-height": $phi,
     "font-weight": bold,
     "font-style": normal,
   ),
@@ -52,7 +59,7 @@ $named-text-styles: (
   "headline": (
     "font-family": $display-font-family,
     "font-size": $font-size-lg,
-    "line-height": $golden-ratio,
+    "line-height": $phi,
     "font-weight": bold,
     "font-style": normal,
   ),
@@ -60,7 +67,7 @@ $named-text-styles: (
   "title": (
     "font-family": $font-family,
     "font-size": $font-size-lg,
-    "line-height": $golden-ratio,
+    "line-height": $phi,
     "font-weight": normal,
     "font-style": normal,
   ),
@@ -68,7 +75,7 @@ $named-text-styles: (
   "subhead": (
     "font-family": $font-family,
     "font-size": $font-size-md,
-    "line-height": $golden-ratio,
+    "line-height": $phi,
     "font-weight": 500,
     "font-style": normal,
   ),
@@ -76,7 +83,7 @@ $named-text-styles: (
   "body2": (
     "font-family": $font-family,
     "font-size": $font-size-md,
-    "line-height": $golden-ratio,
+    "line-height": $phi,
     "font-weight": 400,
     "font-style": normal,
   ),
@@ -92,7 +99,7 @@ $named-text-styles: (
   "caption": (
     "font-family": $font-family,
     "font-size": $font-size-md,
-    "line-height": $golden-ratio,
+    "line-height": $phi,
     "font-weight": normal,
     "font-style": normal,
   ),

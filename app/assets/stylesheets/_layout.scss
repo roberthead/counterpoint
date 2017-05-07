@@ -28,11 +28,11 @@ ul {
 
   h1 {
     font-size: $font-size-xl;
-    line-height: $golden-ratio;
+    line-height: $phi;
   }
 
   p {
-    line-height: $golden-ratio !important;
+    line-height: $phi !important;
   }
 
   thead td {
@@ -68,7 +68,7 @@ ul {
     margin: 1rem 0;
     padding: 1rem;
     min-height: 50vh;
-    background-color: rgba(255, 255, 255, $golden-ratio-inverse);
+    background-color: rgba(255, 255, 255, $phi-a);
     border: 2px solid rgba(255, 255, 255, 0.8);
     border-radius: 1rem;
     font-family: $font-family;
@@ -80,7 +80,7 @@ ul {
     margin: 1rem 0;
     padding: 1rem;
     height: 80vh;
-    background-color: rgba(255, 255, 255, $golden-ratio-inverse);
+    background-color: rgba(255, 255, 255, $phi-a);
     border-radius: 1rem;
   }
 }
