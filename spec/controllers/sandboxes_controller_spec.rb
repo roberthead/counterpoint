@@ -21,19 +21,21 @@ RSpec.describe SandboxesController, type: :controller do
         expect(response).to be_success
       end
 
-      context 'and that identity does not have an existing composition' do
-        it 'creates a new composition' do
-          make_request(identity.id)
-          expect(assigns(:composition).name).to eq "Sarah O'Reilly's Counterpoint"
+      describe 'view object' do
+        context 'and that identity does not have an existing composition' do
+          it 'creates a new composition' do
+            make_request(identity.id)
+            expect(assigns(:sandbox).name).to eq "Sarah O'Reilly's Counterpoint"
+          end
         end
-      end
 
-      context 'and that identity has an existing composition' do
-        let!(:composition) { FactoryGirl.create(:composition, identity: identity) }
+        context 'and that identity has an existing composition' do
+          let!(:composition) { FactoryGirl.create(:composition, identity: identity) }
 
-        it 'assigns that composition' do
-          make_request(identity.id)
-          expect(assigns(:composition)).to eq composition
+          it 'assigns that composition' do
+            make_request(identity.id)
+            expect(assigns(:sandbox).composition).to eq composition
+          end
         end
       end
     end

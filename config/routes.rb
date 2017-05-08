@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   resource :about, only: [:show]
   resource :sandbox, only: [:show]
 
+  resources :notes, only: [:create, :destroy]
+
   root to: 'homes#show'
 end

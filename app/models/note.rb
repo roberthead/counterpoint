@@ -12,4 +12,14 @@
 
 class Note < ApplicationRecord
   belongs_to :voice
+
+  before_validation :normalize_pitch
+
+  private
+
+  def normalize_pitch
+    if pitch == pitch.to_i.to_s
+      self.pitch = HeadMusic::Pitch.get(pitch.to_i).to_s
+    end
+  end
 end

@@ -1,8 +1,16 @@
 class SandboxesController < ApplicationController
   before_action :ensure_authentication!
-  before_action :ensure_composition
+
+  class SandboxView
+    include ActiveModel::Model
+
+    attr_accessor :composition
+
+    delegate :name, :voices, :cantus_firmus, :highest_bar, to: :composition
+  end
 
   def show
+    @sandbox ||= SandboxView.new(composition: ensure_composition)
   end
 
   private

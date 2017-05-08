@@ -21,6 +21,7 @@ class Composition < ApplicationRecord
   has_many :voices, -> { order(:vertical_position) }, inverse_of: :composition, dependent: :destroy
   has_many :counterpoint_voices, -> { where cantus_firmus: false }, class_name: 'Voice', inverse_of: :composition
   has_one :cantus_firmus, -> { where cantus_firmus: true }, class_name: 'Voice', inverse_of: :composition
+  has_many :notes, through: :voices
 
   before_validation :ensure_defaults
   before_validation :ensure_voices

@@ -1,4 +1,4 @@
-%h2= @composition.name
+%h2= @sandbox.name
 
 .sandbox
   %table.sandbox__score
@@ -21,5 +21,10 @@
                   .sandbox__piano-key-front.sandbox__piano-key-front--lower-half
             - else
               .sandbox__piano-key.sandbox__piano-key--white{class: "sandbox__piano-key--#{white_type}"}
-          - (1..[@composition.highest_bar, 8].max).each do |bar|
+          - (1..[@sandbox.highest_bar, 8].max).each do |bar|
             %td.sandbox__pitch-bar{class: "sandbox__pitch-bar--#{cycle('even', 'odd')}" }
+              - note = @sandbox.cantus_firmus.notes.where(bar: bar, pitch: pitch.to_s).first
+              - if note.nil?
+                = link_to('', notes_url(note: {bar: bar, pitch: pitch.to_s}), method: :post, class: "sandbox__note-link sandbox__note-link--create")
+              - else
+                = link_to('', note_url(note), method: :delete, class: "sandbox__note-link sandbox__note-link--delete sandbox__note-link--cantus-firmus")

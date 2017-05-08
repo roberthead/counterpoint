@@ -110,4 +110,15 @@ $bar-widgth: 50pt;
       border-top: 1px solid mui-color("blue-grey", "200");
     };
   }
+
+  &__note-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: ($pitch-height / 2);
+
+    &--cantus-firmus {
+      background-color: rgba(mui-color("purple", "500"), 50%);
+    }
+  }
 }

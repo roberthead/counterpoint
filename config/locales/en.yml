@@ -12,6 +12,6 @@ en:
       compositions: Compositions
       home: Home
       sign_in: Sign in
-      sign_out: Sign out %{name}
+      sign_out: Sign out
   site:
     name: Juxtacompose

@@ -19,4 +19,10 @@ class Voice < ApplicationRecord
   def highest_bar
     notes.map(&:bar).select(&:present?).max || 1
   end
+
+  def add_note(bar:, pitch:)
+    note = notes.where(bar: bar).first_or_initialize
+    note.pitch = pitch
+    note.save
+  end
 end
