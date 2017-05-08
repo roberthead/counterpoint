@@ -18,7 +18,7 @@ class Composition < ApplicationRecord
   validates :identity, presence: true
 
   belongs_to :identity
-  has_many :voices, inverse_of: :composition, dependent: :destroy
+  has_many :voices, -> { order(:vertical_position) }, inverse_of: :composition, dependent: :destroy
   has_many :counterpoint_voices, -> { where cantus_firmus: false }, class_name: 'Voice', inverse_of: :composition
   has_one :cantus_firmus, -> { where cantus_firmus: true }, class_name: 'Voice', inverse_of: :composition
 
@@ -27,6 +27,10 @@ class Composition < ApplicationRecord
 
   DEFAULT_KEY = "C major"
   DEFAULT_METER = "4/4"
+
+  def highest_bar
+    voices.map(&:highest_bar).max || 1
+  end
 
   private
 

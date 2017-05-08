@@ -15,4 +15,8 @@ class Voice < ApplicationRecord
   belongs_to :composition
 
   has_many :notes, inverse_of: :voice, dependent: :destroy
+
+  def highest_bar
+    notes.map(&:bar).select(&:present?).max || 1
+  end
 end

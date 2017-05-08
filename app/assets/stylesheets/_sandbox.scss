@@ -1,0 +1,113 @@
+$pitch-height: 10pt;
+$key-length: 50pt;
+$key-edge-color: mui-color('blue-grey', '500');
+$bar-widgth: 50pt;
+
+.sandbox {
+  &__score {
+    width: 100%;
+    border-collapse: collapse;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__pitch {
+    height: $pitch-height;
+    border: 0;
+    margin: 0;
+    padding: 0;
+
+    &--black {
+      background: mui-color("blue-grey", "50");
+    }
+  }
+
+  &__pitch-piano-key {
+    width: $key-length;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__piano-key {
+    background-color: mui-color('ivory');
+    width: $key-length;
+    height: $pitch-height;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
+    &--black {
+      display: flex;
+      flex-direction: column;
+      border: 0;
+    }
+
+    &--white {
+      border-right: 1px solid $key-edge-color;
+    }
+
+    &--no-flat {
+      border-bottom: 0.5px solid $key-edge-color;
+      border-radius: 0 0 ($pitch-height / 4) 0;
+    }
+
+    &--no-sharp {
+      border-top: 0.5px solid $key-edge-color;
+      border-radius: 0 ($pitch-height / 4) 0 0;
+    }
+  }
+
+  &__piano-key-half {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__piano-key-back {
+    flex: 2;
+    background-color: mui-color('ebony');
+    font-size: 4pt;
+
+    &--upper-half {
+      border-radius: 0 ($pitch-height / 4) 0 0;
+    }
+
+    &--lower-half {
+      border-radius: 0 0 ($pitch-height / 4) 0;
+    }
+  }
+
+  &__piano-key-front {
+    flex: 1;
+    font-size: 4pt;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    border-right: 1px solid $key-edge-color;
+
+    &--upper-half {
+      border-bottom: 0.5px solid $key-edge-color;
+      border-radius: 0 0 ($pitch-height / 4) 0;
+    }
+
+    &--lower-half {
+      border-top: 0.5px solid $key-edge-color;
+      border-radius: 0 ($pitch-height / 4) 0 0;
+    }
+  }
+
+  &__pitch-bar {
+    height: $pitch-height;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    border-right: 1px solid mui-color("blue-grey", "200");
+    border-bottom: 1px solid mui-color("blue-grey", "200");
+
+    .sandbox__pitch:first-child & {
+      border-top: 1px solid mui-color("blue-grey", "200");
+    };
+  }
+}

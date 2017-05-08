@@ -1,2 +1,25 @@
-%h1 Sandboxes#show
-%p Find me in app/views/sandboxes/show.html.haml
+%h2= @composition.name
+
+.sandbox
+  %table.sandbox__score
+    %tbody
+      - 84.downto(36).each do |midi_note_number|
+        - pitch = HeadMusic::Pitch.get(midi_note_number)
+        - accidental = pitch.accidental.present?
+        - no_flat = pitch.letter_name.name.in?(%w[C F])
+        - no_sharp = pitch.letter_name.name.in?(%w[B E])
+        - white_type = no_flat ? 'no-flat' : no_sharp ? 'no-sharp' : 'flat-and-sharp'
+        %tr.sandbox__pitch{class: "sandbox__pitch--#{accidental ? 'black' : 'white'}"}
+          %th.sandbox__pitch-piano-key
+            - if accidental.present?
+              .sandbox__piano-key.sandbox__piano-key--black
+                .sandbox__piano-key-half
+                  .sandbox__piano-key-back.sandbox__piano-key-back--upper-half
+                  .sandbox__piano-key-front.sandbox__piano-key-front--upper-half
+                .sandbox__piano-key-half
+                  .sandbox__piano-key-back.sandbox__piano-key-back--lower-half
+                  .sandbox__piano-key-front.sandbox__piano-key-front--lower-half
+            - else
+              .sandbox__piano-key.sandbox__piano-key--white{class: "sandbox__piano-key--#{white_type}"}
+          - (1..[@composition.highest_bar, 8].max).each do |bar|
+            %td.sandbox__pitch-bar{class: "sandbox__pitch-bar--#{cycle('even', 'odd')}" }
