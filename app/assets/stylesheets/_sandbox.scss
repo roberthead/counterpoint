@@ -1,7 +1,7 @@
 $pitch-height: 10pt;
 $key-length: 50pt;
 $key-edge-color: mui-color('blue-grey', '500');
-$bar-widgth: 50pt;
+$bar-width: 50pt;
 
 .sandbox {
   &__score {
@@ -108,7 +108,7 @@ $bar-widgth: 50pt;
 
     .sandbox__pitch:first-child & {
       border-top: 1px solid mui-color("blue-grey", "200");
-    };
+    }
   }
 
   &__note-link {
@@ -120,5 +120,27 @@ $bar-widgth: 50pt;
     &--cantus-firmus {
       background-color: rgba(mui-color("purple", "500"), 50%);
     }
+  }
+
+  &__annotation {
+    margin-left: 8em;
+  }
+
+  &__annotation-marks {
+    display: inline-block;
+    width: 3em;
+  }
+
+  &__annotation-mark {
+  }
+
+  &__annotation-message {
+    display: inline-block;
+    width: 20em;
+  }
+
+  &__annotation-fitness {
+    display: inline-block;
+    width: 5em;
   }
 }

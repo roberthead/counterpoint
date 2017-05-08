@@ -21,10 +21,19 @@
                   .sandbox__piano-key-front.sandbox__piano-key-front--lower-half
             - else
               .sandbox__piano-key.sandbox__piano-key--white{class: "sandbox__piano-key--#{white_type}"}
-          - (1..[@sandbox.highest_bar, 8].max).each do |bar|
+          - (1..[@sandbox.highest_bar+1, 8].max).each do |bar|
             %td.sandbox__pitch-bar{class: "sandbox__pitch-bar--#{cycle('even', 'odd')}" }
               - note = @sandbox.cantus_firmus.notes.where(bar: bar, pitch: pitch.to_s).first
               - if note.nil?
                 = link_to('', notes_url(note: {bar: bar, pitch: pitch.to_s}), method: :post, class: "sandbox__note-link sandbox__note-link--create")
               - else
                 = link_to('', note_url(note), method: :delete, class: "sandbox__note-link sandbox__note-link--delete sandbox__note-link--cantus-firmus")
+  .sandbox__annotations
+    - @sandbox.annotations.each do |annotation|
+      - if annotation.fitness < 1
+        .sandbox__annotation{class: "sandbox__annotation--#{annotation.earliest_bar}"}
+          .sandbox__annotation-marks
+            - [annotation.marks].flatten.each do |mark|
+              .sandbox__annotation-mark= mark.start_bar - 1
+          .sandbox__annotation-fitness= annotation.fitness.round(3)
+          .sandbox__annotation-message= annotation.message
