@@ -21,6 +21,16 @@ $bar-width: 50pt;
     &--black {
       background: mui-color("blue-grey", "50");
     }
+
+    &:hover {
+      .sandbox__piano-key--white {
+        background-color: red;
+      }
+
+      .sandbox__piano-key-back {
+        background-color: red;
+      }
+    }
   }
 
   &__pitch-piano-key {

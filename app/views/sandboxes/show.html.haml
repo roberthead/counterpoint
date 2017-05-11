@@ -1,6 +1,9 @@
-%h2= @sandbox.name
-
 .sandbox
+  %h2.sandbox__title= @sandbox.name
+  .sandbox__data
+    .sandbox__key_signature
+      = @sandbox.key_signature
+
   %table.sandbox__score
     %tbody
       - 84.downto(36).each do |midi_note_number|

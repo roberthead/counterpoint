@@ -19,8 +19,9 @@ class Composition < ApplicationRecord
 
   belongs_to :identity
   has_many :voices, -> { order(:vertical_position) }, inverse_of: :composition, dependent: :destroy
-  has_many :counterpoint_voices, -> { where cantus_firmus: false }, class_name: 'Voice', inverse_of: :composition
   has_one :cantus_firmus, -> { where cantus_firmus: true }, class_name: 'Voice', inverse_of: :composition
+  has_many :counterpoint_voices, -> { where(cantus_firmus: false).order(:vertical_position) }, class_name: 'Voice', inverse_of: :composition
+  has_one :counterpoint_voice, -> { where(cantus_firmus: false).order(:vertical_position) }, class_name: 'Voice', inverse_of: :composition
   has_many :notes, through: :voices
 
   before_validation :ensure_defaults
@@ -33,6 +34,23 @@ class Composition < ApplicationRecord
     voices.map(&:highest_bar).max || 1
   end
 
+  def head_music_composition
+    @head_music_composition ||= begin
+      HeadMusic::Composition.new(name: name, key_signature: key_signature, meter: meter).tap do |hm_composition|
+        hm_composition.add_voice(role: 'Cantus Firmus')
+        hm_cantus_firmus = hm_composition.voices.first
+        cantus_firmus.notes.each do |note|
+          hm_cantus_firmus.place("#{note.bar}:1", :whole, note.pitch)
+        end
+        hm_composition.add_voice(role: 'Counterpoint')
+        hm_counterpoint = hm_composition.voices.last
+        counterpoint_voice.notes.each do |note|
+          hm_counterpoint.place("#{note.bar}:1", :whole, note.pitch)
+        end
+      end
+    end
+  end
+
   private
 
   def ensure_defaults
@@ -42,10 +60,10 @@ class Composition < ApplicationRecord
 
   def ensure_voices
     if self.cantus_firmus.nil?
-      self.build_cantus_firmus(cantus_firmus: true, vertical_position: 2)
+      self.build_cantus_firmus(cantus_firmus: true, vertical_position: 1)
     end
     if counterpoint_voices.none?
-      self.counterpoint_voices.build(vertical_position: 1)
+      self.counterpoint_voices.build(vertical_position: 2)
     end
   end
 end
