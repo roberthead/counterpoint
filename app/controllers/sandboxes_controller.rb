@@ -34,7 +34,7 @@ class SandboxesController < ApplicationController
 
     attr_accessor :composition
 
-    delegate :name, :voices, :cantus_firmus, :highest_bar, to: :composition
+    delegate :name, :voices, :cantus_firmus, :highest_bar, :key_signature, to: :composition
 
     def annotations
       @annotations ||= analysis.annotations.select { |annotation|
@@ -46,7 +46,7 @@ class SandboxesController < ApplicationController
 
     def analysis
       @analysis ||= begin
-        hm_composition = HeadMusic::Composition.new(name: composition.name, key_signature: composition.key)
+        hm_composition = HeadMusic::Composition.new(name: composition.name, key_signature: composition.key_signature)
         hm_voice = HeadMusic::Voice.new(role: "Cantus Firmus", composition: hm_composition)
         cantus_firmus.notes.each do |note|
           hm_voice.place("#{note.bar}:1:0", :whole, note.pitch.to_s)

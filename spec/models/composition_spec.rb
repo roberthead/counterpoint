@@ -2,13 +2,13 @@
 #
 # Table name: compositions
 #
-#  id          :integer          not null, primary key
-#  name        :string           not null
-#  key         :string           default("C major"), not null
-#  meter       :string           default("4/4"), not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  identity_id :integer          not null
+#  id            :integer          not null, primary key
+#  name          :string           not null
+#  key_signature :string           default("C major"), not null
+#  meter         :string           default("4/4"), not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  identity_id   :integer          not null
 #
 
 require 'rails_helper'
@@ -21,14 +21,23 @@ RSpec.describe Composition, type: :model do
   it { is_expected.to belong_to(:identity) }
   it { is_expected.to have_one(:cantus_firmus) }
 
+  describe 'head_music_composition' do
+    context 'when the composition is empty' do
+      subject(:composition) { FactoryGirl.create(:composition) }
+    end
+    it 'constructs and returns a complete head_music composition' do
+
+    end
+  end
+
   describe 'default values' do
     let(:composition) { Composition.new }
 
-    it 'defaults key to C major' do
-      expect(composition.key).to eq 'C major'
+    it 'defaults key_signature to C major' do
+      expect(composition.key_signature).to eq 'C major'
     end
 
-    it 'defaults key to 4/4' do
+    it 'defaults meter to 4/4' do
       expect(composition.meter).to eq '4/4'
     end
   end
