@@ -23,9 +23,10 @@ RSpec.describe Composition, type: :model do
   it { is_expected.to have_one(:cantus_firmus) }
 
   describe 'head_music_composition' do
+    subject(:head_music_composition) { composition.head_music_composition }
+
     context 'when the composition is empty' do
       let(:composition) { FactoryGirl.create(:composition, key_signature: 'D Major') }
-      subject(:head_music_composition) { composition.head_music_composition }
 
       it { is_expected.to be_a(HeadMusic::Composition) }
 
@@ -35,29 +36,15 @@ RSpec.describe Composition, type: :model do
     end
 
     context 'when the composition has notes' do
-      let(:composition) { FactoryGirl.create(:composition) }
-      subject(:head_music_composition) { composition.head_music_composition }
+      let(:composition) { FactoryGirl.create(:composition, key_signature: 'D Major') }
 
       before do
-        composition.cantus_firmus.add_note(bar: 1, pitch: 'D4')
-        composition.cantus_firmus.add_note(bar: 2, pitch: 'E4')
-        composition.cantus_firmus.add_note(bar: 3, pitch: 'F#4')
-        composition.cantus_firmus.add_note(bar: 4, pitch: 'A4')
-        composition.cantus_firmus.add_note(bar: 5, pitch: 'G4')
-        composition.cantus_firmus.add_note(bar: 6, pitch: 'E4')
-        composition.cantus_firmus.add_note(bar: 7, pitch: 'F#4')
-        composition.cantus_firmus.add_note(bar: 8, pitch: 'E4')
-        composition.cantus_firmus.add_note(bar: 9, pitch: 'D4')
-
-        composition.counterpoint_voice.add_note(bar: 1, pitch: 'D5')
-        composition.counterpoint_voice.add_note(bar: 2, pitch: 'C#5')
-        composition.counterpoint_voice.add_note(bar: 3, pitch: 'A4')
-        composition.counterpoint_voice.add_note(bar: 4, pitch: 'C#5')
-        composition.counterpoint_voice.add_note(bar: 5, pitch: 'D5')
-        composition.counterpoint_voice.add_note(bar: 6, pitch: 'G4')
-        composition.counterpoint_voice.add_note(bar: 7, pitch: 'A4')
-        composition.counterpoint_voice.add_note(bar: 8, pitch: 'C#5')
-        composition.counterpoint_voice.add_note(bar: 9, pitch: 'D5')
+        %w[D4 E4 F#4 A4 G4 E4 F#4 E4 D4].each_with_index do |pitch, i|
+          composition.cantus_firmus.add_note(bar: i + 1, pitch: pitch)
+        end
+        %w[D5 C#5 A4 C#5 D5 G4 A4 C#5 D5].each_with_index do |pitch, i|
+          composition.counterpoint_voice.add_note(bar: i + 1, pitch: pitch)
+        end
       end
 
       its(:voices) { are_expected.to be_present }
@@ -68,6 +55,29 @@ RSpec.describe Composition, type: :model do
         counterpoint = subject.voices.detect { |voice| voice.role != "Cantus Firmus" }
         expect(counterpoint.notes.map { |note| note.pitch.to_s }).to eq %w[D5 C#5 A4 C#5 D5 G4 A4 C#5 D5]
       end
+    end
+  end
+
+  describe '#cantus_firmus_analysis' do
+    context 'when the composition is imperfect' do
+      let(:composition) { FactoryGirl.create(:composition) }
+      let(:analysis) { composition.cantus_firmus_analysis }
+      let(:issues) { composition.cantus_firmus_issues }
+
+      before do
+        %w[D4 E4 F#4 A4 G4 E4 F#4 E4 D4].each_with_index do |pitch, i|
+          composition.cantus_firmus.add_note(bar: i + 1, pitch: pitch)
+        end
+        %w[D5 C#5 A4 C#5 D5 G4 A4 C#5 D5].each_with_index do |pitch, i|
+          composition.counterpoint_voice.add_note(bar: i + 1, pitch: pitch)
+        end
+      end
+
+      specify { expect(analysis).to be_a(HeadMusic::Style::Analysis) }
+      specify { expect(issues.map(&:message)).to include 'Use only notes in the key signature.' }
+      specify { expect(issues.map(&:message)).to include 'Start on the tonic.' }
+      specify { expect(issues.map(&:message)).to include 'End on the tonic.' }
+      specify { expect(issues.length).to be < composition.cantus_firmus_annotations.length }
     end
   end
 

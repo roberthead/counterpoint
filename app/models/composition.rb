@@ -51,6 +51,23 @@ class Composition < ApplicationRecord
     end
   end
 
+  def cantus_firmus_issues
+    cantus_firmus_annotations.reject(&:perfect?).sort_by(&:start_position)
+  end
+
+  def cantus_firmus_annotations
+    cantus_firmus_analysis.annotations
+  end
+
+  def cantus_firmus_analysis
+    @analysis ||=
+      HeadMusic::Style::Analysis.new(HeadMusic::Style::Rulesets::CantusFirmus, head_music_cantus_firmus_voice)
+  end
+
+  def head_music_cantus_firmus_voice
+    @head_music_cantus_firmus_voice ||= head_music_composition.voices.detect { |voice| voice.role == "Cantus Firmus" }
+  end
+
   private
 
   def ensure_defaults

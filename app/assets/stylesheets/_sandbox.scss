@@ -115,6 +115,7 @@ $bar-width: 50pt;
     padding: 0;
     border-right: 1px solid mui-color("blue-grey", "200");
     border-bottom: 1px solid mui-color("blue-grey", "200");
+    min-width: 2em;
 
     .sandbox__pitch:first-child & {
       border-top: 1px solid mui-color("blue-grey", "200");
@@ -138,15 +139,18 @@ $bar-width: 50pt;
 
   &__annotation-marks {
     display: inline-block;
-    width: 3em;
+    width: 7em;
   }
 
   &__annotation-mark {
+    & + & {
+      padding-left: 1rem;
+    }
   }
 
   &__annotation-message {
     display: inline-block;
-    width: 20em;
+    width: 35em;
   }
 
   &__annotation-fitness {
