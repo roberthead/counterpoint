@@ -32,4 +32,21 @@ RSpec.describe Voice, type: :model do
       end
     end
   end
+
+  describe '#role' do
+    let(:voice) { Voice.new(cantus_firmus: cantus_firmus) }
+    subject { voice.role }
+
+    context 'when cantus_firmus is true' do
+      let(:cantus_firmus) { true }
+
+      it { is_expected.to eq 'cantus_firmus' }
+    end
+
+    context 'when cantus_firmus is false' do
+      let(:cantus_firmus) { false }
+
+      it { is_expected.to eq 'counterpoint' }
+    end
+  end
 end

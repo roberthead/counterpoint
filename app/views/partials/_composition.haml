@@ -1,0 +1,10 @@
+%h2.sandbox__title= composition.name
+= form_for(composition, url: {controller: 'compositions', action: 'update', id: composition.id}, html: {class: 'sandbox__form'}) do |f|
+  .sandbox__key_signature
+    = f.select(:key_signature, ["C major", "D dorian"])
+  = f.submit 'Save'
+.sandbox_voice
+  - if @sandbox.voice_cantus_firmus?
+    = link_to t('.enter_counterpoint'), sandbox_path
+  - else
+    = link_to t('.enter_cantus_firmus'), sandbox_path(voice: 'cantus_firmus')

@@ -131,6 +131,10 @@ $bar-width: 50pt;
     &--cantus-firmus {
       background-color: rgba(mui-color("purple", "500"), 50%);
     }
+
+    &--counterpoint {
+      background-color: rgba(mui-color("blue", "500"), 50%);
+    }
   }
 
   &__annotation {

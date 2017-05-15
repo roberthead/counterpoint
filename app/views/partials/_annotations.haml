@@ -1,0 +1,8 @@
+.sandbox__annotations
+  - annotations.each do |annotation|
+    .sandbox__annotation{ class: "sandbox__annotation--#{annotation.start_position.to_s.to_i}" }
+      .sandbox__annotation-marks
+        - [annotation.marks].flatten.each do |mark|
+          .sandbox__annotation-mark= mark.start_position.to_s.to_i
+      .sandbox__annotation-fitness= annotation.fitness.round(3)
+      .sandbox__annotation-message= annotation.message

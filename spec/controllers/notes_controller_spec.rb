@@ -8,7 +8,7 @@ RSpec.describe NotesController, type: :controller do
 
       it 'creates a note' do
         expect {
-          post :create, params: {note: {bar: 4, pitch: 90}}, session: {identity_id: identity.id}
+          post :create, params: {note: {voice_id: composition.cantus_firmus.id, bar: 4, pitch: 90}}, session: {identity_id: identity.id}
         }.to change {
           composition.reload.notes.count
         }.by(1)

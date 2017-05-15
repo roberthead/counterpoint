@@ -1,0 +1,26 @@
+%table.sandbox__score
+  %tbody
+    - sandbox.pitches.reverse.each do |pitch|
+      - accidental = pitch.accidental.present?
+      - no_flat = pitch.letter_name.name.in?(%w[C F])
+      - no_sharp = pitch.letter_name.name.in?(%w[B E])
+      - white_type = no_flat ? 'no-flat' : no_sharp ? 'no-sharp' : 'flat-and-sharp'
+      %tr.sandbox__pitch{class: "sandbox__pitch--#{accidental ? 'black' : 'white'}"}
+        %th.sandbox__pitch-piano-key
+          - if accidental.present?
+            .sandbox__piano-key.sandbox__piano-key--black
+              .sandbox__piano-key-half
+                .sandbox__piano-key-back.sandbox__piano-key-back--upper-half
+                .sandbox__piano-key-front.sandbox__piano-key-front--upper-half
+              .sandbox__piano-key-half
+                .sandbox__piano-key-back.sandbox__piano-key-back--lower-half
+                .sandbox__piano-key-front.sandbox__piano-key-front--lower-half
+          - else
+            .sandbox__piano-key.sandbox__piano-key--white{class: "sandbox__piano-key--#{white_type}"}
+        - (1..[sandbox.highest_bar+1, 8].max).each do |bar|
+          %td.sandbox__pitch-bar{class: "sandbox__pitch-bar--#{cycle('even', 'odd')}" }
+            - note = sandbox.voices.map(&:notes).flatten.detect { |note| p bar; p pitch; note.bar == bar && note.pitch == pitch.name }
+            - if note.nil?
+              = link_to('', notes_url(note: {bar: bar, pitch: pitch.to_s, voice_id: sandbox.voice_id}), method: :post, class: "sandbox__note-link sandbox__note-link--create")
+            - else
+              = link_to('', note_url(note), method: :delete, class: "sandbox__note-link sandbox__note-link--delete sandbox__note-link--#{note.voice.role.dasherize}")

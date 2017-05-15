@@ -25,4 +25,8 @@ class Voice < ApplicationRecord
     note.pitch = pitch
     note.save
   end
+
+  def role
+    cantus_firmus ? 'cantus_firmus' : 'counterpoint'
+  end
 end

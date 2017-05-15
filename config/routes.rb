@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resource :style_guide, only: [:show]
   resource :about, only: [:show]
   resource :sandbox, only: [:show]
+  resource :composition, only: [:update]
 
   resources :notes, only: [:create, :destroy]
 

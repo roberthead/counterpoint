@@ -13,5 +13,10 @@ en:
       home: Home
       sign_in: Sign in
       sign_out: Sign out
+  partials:
+    composition:
+      enter_cantus_firmus: Enter C.F.
+      enter_counterpoint: Enter C.P.
+      save: Save
   site:
     name: Juxtacompose

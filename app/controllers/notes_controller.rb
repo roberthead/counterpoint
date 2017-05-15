@@ -3,13 +3,15 @@ class NotesController < ApplicationController
 
   def create
     composition = current_identity.composition
-    composition.cantus_firmus.add_note(bar: note_params[:bar], pitch: note_params[:pitch])
-    redirect_to sandbox_path
+    voice = composition.voices.find(note_params[:voice_id])
+    voice.add_note(bar: note_params[:bar], pitch: note_params[:pitch])
+    redirect_to sandbox_path(voice: voice.role)
   end
 
   def destroy
-    composition.notes.where(id: params[:id]).destroy_all
-    redirect_to sandbox_path
+    note = Note.where(id: params[:id], composition_id: composition.id).first
+    note.destroy
+    redirect_to sandbox_path(voice: note.try(:voice).try(:role))
   end
 
   private
@@ -19,6 +21,6 @@ class NotesController < ApplicationController
   end
 
   def note_params
-    params.require(:note).permit(:bar, :pitch)
+    params.require(:note).permit(:bar, :pitch, :voice_id)
   end
 end
