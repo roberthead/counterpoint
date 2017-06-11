@@ -14,6 +14,8 @@ en:
       sign_in: Sign in
       sign_out: Sign out
   partials:
+    annotations:
+      perfect_score: No annotations.
     composition:
       enter_cantus_firmus: Enter Cantus Firmus
       enter_counterpoint: Enter Counterpoint

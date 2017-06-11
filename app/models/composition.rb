@@ -64,7 +64,7 @@ class Composition < ApplicationRecord
   end
 
   def first_species_counterpoint_annotations
-    [first_species_melody_analysis.annotations, first_species_harmony_analysis.annotations].flatten.reject(&:nil?)
+    [first_species_melody_analysis.annotations, first_species_harmony_analysis.annotations].flatten.compact
   end
 
   def first_species_melody_analysis

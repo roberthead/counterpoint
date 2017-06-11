@@ -4,7 +4,7 @@
     = "(#{fitness})"
   - if annotations.empty?
     .sandbox__annotation
-      There are no marks.
+      = t('.perfect_score')
   - annotations.each do |annotation|
     .sandbox__annotation{ class: "sandbox__annotation--#{annotation.start_position.to_s.to_i}" }
       .sandbox__annotation-marks
