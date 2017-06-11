@@ -9,7 +9,7 @@ class NotesController < ApplicationController
   end
 
   def destroy
-    note = Note.where(id: params[:id], composition_id: composition.id).first
+    note = Note.where(id: params[:id]).first
     note.destroy
     redirect_to sandbox_path(voice: note.try(:voice).try(:role))
   end

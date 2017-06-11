@@ -18,6 +18,10 @@ class SandboxesController < ApplicationController
       end
     end
 
+    def voice_role_modifier
+      voice.role.to_s.downcase.gsub(/\W+/, '-').gsub(/_/, '-')
+    end
+
     private
 
     def highest_note
@@ -25,7 +29,7 @@ class SandboxesController < ApplicationController
     end
 
     def lowest_note
-      HeadMusic::Pitch.get('C2')
+      HeadMusic::Pitch.get('A2')
     end
   end
 

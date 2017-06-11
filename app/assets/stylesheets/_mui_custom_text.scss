@@ -5,7 +5,7 @@
 $font-family: "Avenir Next", "Avenir", -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
 
 $display-font-family: 'Cormorant Garamond', serif;
-$base-font-size: 16pt;
+$base-font-size: 12pt;
 
 $phi: 1.618034;
 $phi-a: 1 / $phi; // 0.618034, also computable as: $phi - 1
@@ -109,7 +109,7 @@ $named-text-styles: (
   "button": (
     "line-height": normal,
     "font-family": $font-family,
-    "font-size": $font-size-md,
+    "font-size": $font-size-sm,
     "font-weight": 600,
     "font-style": normal,
   )

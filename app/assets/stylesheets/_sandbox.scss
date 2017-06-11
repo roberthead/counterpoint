@@ -3,6 +3,9 @@ $key-length: 50pt;
 $key-edge-color: mui-color('blue-grey', '500');
 $bar-width: 50pt;
 
+$cantus-firmus-color: rgba(mui-color("purple", "500"), 50%);
+$counterpoint-color: rgba(mui-color("blue", "500"), 50%);
+
 .sandbox {
   &__score {
     width: 100%;
@@ -10,6 +13,14 @@ $bar-width: 50pt;
     border: 0;
     margin: 0;
     padding: 0;
+  }
+
+  &__key-signature {
+    display: inline-block;
+  }
+
+  &__voice {
+    display: inline-block;
   }
 
   &__pitch {
@@ -24,11 +35,23 @@ $bar-width: 50pt;
 
     &:hover {
       .sandbox__piano-key--white {
-        background-color: red;
+        .sandbox__score--counterpoint & {
+          background-color: $counterpoint-color;
+        }
+
+        .sandbox__score--cantus-firmus & {
+          background-color: $cantus-firmus-color;
+        }
       }
 
       .sandbox__piano-key-back {
-        background-color: red;
+        .sandbox__score--counterpoint & {
+          background-color: $counterpoint-color;
+        }
+
+        .sandbox__score--cantus-firmus & {
+          background-color: $cantus-firmus-color;
+        }
       }
     }
   }
@@ -129,27 +152,26 @@ $bar-width: 50pt;
     border-radius: ($pitch-height / 2);
 
     &--cantus-firmus {
-      background-color: rgba(mui-color("purple", "500"), 50%);
+      background-color: $cantus-firmus-color;
     }
 
     &--counterpoint {
-      background-color: rgba(mui-color("blue", "500"), 50%);
+      background-color: $counterpoint-color;
     }
   }
 
   &__annotation {
     margin-left: 8em;
+    border-bottom: 1px solid mui-color("blue-grey", "200");
   }
 
   &__annotation-marks {
     display: inline-block;
-    width: 7em;
+    width: 12em;
   }
 
   &__annotation-mark {
-    & + & {
-      padding-left: 1rem;
-    }
+    width: 12em;
   }
 
   &__annotation-message {

@@ -1,4 +1,9 @@
-%table.sandbox__score
+%table.sandbox__score{ class: "sandbox__score--#{sandbox.voice_role_modifier}" }
+  %thead
+    %tr
+      - (0..[sandbox.highest_bar+1, 8].max).each do |bar|
+        %th
+          = bar if bar > 0
   %tbody
     - sandbox.pitches.reverse.each do |pitch|
       - accidental = pitch.accidental.present?
@@ -19,7 +24,7 @@
             .sandbox__piano-key.sandbox__piano-key--white{class: "sandbox__piano-key--#{white_type}"}
         - (1..[sandbox.highest_bar+1, 8].max).each do |bar|
           %td.sandbox__pitch-bar{class: "sandbox__pitch-bar--#{cycle('even', 'odd')}" }
-            - note = sandbox.voices.map(&:notes).flatten.detect { |note| p bar; p pitch; note.bar == bar && note.pitch == pitch.name }
+            - note = sandbox.voices.map(&:notes).flatten.detect { |note| note.bar == bar && note.pitch == pitch.name }
             - if note.nil?
               = link_to('', notes_url(note: {bar: bar, pitch: pitch.to_s, voice_id: sandbox.voice_id}), method: :post, class: "sandbox__note-link sandbox__note-link--create")
             - else

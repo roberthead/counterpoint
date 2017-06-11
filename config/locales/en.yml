@@ -15,8 +15,8 @@ en:
       sign_out: Sign out
   partials:
     composition:
-      enter_cantus_firmus: Enter C.F.
-      enter_counterpoint: Enter C.P.
+      enter_cantus_firmus: Enter Cantus Firmus
+      enter_counterpoint: Enter Counterpoint
       save: Save
   site:
     name: Juxtacompose

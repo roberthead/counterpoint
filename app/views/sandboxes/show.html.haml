@@ -1,4 +1,5 @@
 .sandbox
   = render partial: 'partials/composition', locals: { composition: @sandbox.composition }
   = render partial: 'partials/score', locals: { sandbox: @sandbox }
-  = render partial: 'partials/annotations', locals: { annotations: @sandbox.composition.cantus_firmus_issues }
+  = render partial: 'partials/annotations', locals: { annotations: @sandbox.composition.cantus_firmus_issues, header: 'Cantus Firmus', fitness: @sandbox.composition.cantus_firmus_fitness_percentage }
+  = render partial: 'partials/annotations', locals: { annotations: @sandbox.composition.first_species_counterpoint_issues, header: 'First Species Counterpoint', fitness: @sandbox.composition.first_species_counterpoint_fitness_percentage }

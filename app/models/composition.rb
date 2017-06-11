@@ -51,6 +51,44 @@ class Composition < ApplicationRecord
     end
   end
 
+  def first_species_counterpoint_fitness_percentage
+    "#{(first_species_counterpoint_fitness * 100).round(1)}%"
+  end
+
+  def first_species_counterpoint_fitness
+    (first_species_melody_analysis.fitness + first_species_harmony_analysis.fitness) / 2.0
+  end
+
+  def first_species_counterpoint_issues
+    first_species_counterpoint_annotations.reject(&:perfect?).sort_by(&:start_position)
+  end
+
+  def first_species_counterpoint_annotations
+    [first_species_melody_analysis.annotations, first_species_harmony_analysis.annotations].flatten.reject(&:nil?)
+  end
+
+  def first_species_melody_analysis
+    @first_species_melody_analysis ||=
+      HeadMusic::Style::Analysis.new(HeadMusic::Style::Rulesets::FirstSpeciesMelody, head_music_counterpoint_voice)
+  end
+
+  def first_species_harmony_analysis
+    @first_species_harmony_analysis ||=
+      HeadMusic::Style::Analysis.new(HeadMusic::Style::Rulesets::FirstSpeciesHarmony, head_music_counterpoint_voice)
+  end
+
+  def head_music_counterpoint_voice
+    @head_music_counterpoint_voice ||= head_music_composition.voices.detect { |voice| voice.role == 'Counterpoint' }
+  end
+
+  def cantus_firmus_fitness_percentage
+    "#{(cantus_firmus_fitness * 100).round(1)}%"
+  end
+
+  def cantus_firmus_fitness
+    cantus_firmus_analysis.fitness
+  end
+
   def cantus_firmus_issues
     cantus_firmus_annotations.reject(&:perfect?).sort_by(&:start_position)
   end
@@ -60,12 +98,12 @@ class Composition < ApplicationRecord
   end
 
   def cantus_firmus_analysis
-    @analysis ||=
+    @cantus_firmus_analysis ||=
       HeadMusic::Style::Analysis.new(HeadMusic::Style::Rulesets::CantusFirmus, head_music_cantus_firmus_voice)
   end
 
   def head_music_cantus_firmus_voice
-    @head_music_cantus_firmus_voice ||= head_music_composition.voices.detect { |voice| voice.role == "Cantus Firmus" }
+    @head_music_cantus_firmus_voice ||= head_music_composition.voices.detect { |voice| voice.role == 'Cantus Firmus' }
   end
 
   private
