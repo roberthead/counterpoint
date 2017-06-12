@@ -17,8 +17,10 @@ en:
     annotations:
       perfect_score: No annotations.
     composition:
-      enter_cantus_firmus: Enter Cantus Firmus
-      enter_counterpoint: Enter Counterpoint
+      enter_cantus_firmus: Switch to Cantus Firmus
+      enter_counterpoint: Switch to Counterpoint Voice
+      entering_cantus_firmus: Entering Cantus Firmus
+      entering_counterpoint: Entering Counterpoint Voice
       save: Save
   site:
     name: Juxtacompose
