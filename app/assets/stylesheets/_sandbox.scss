@@ -161,17 +161,16 @@ $counterpoint-color: rgba(mui-color("blue", "500"), 50%);
   }
 
   &__annotation {
-    margin-left: 8em;
     border-bottom: 1px solid mui-color("blue-grey", "200");
   }
 
   &__annotation-marks {
     display: inline-block;
-    width: 12em;
+    width: 5em;
   }
 
   &__annotation-mark {
-    width: 12em;
+    width: 5em;
   }
 
   &__annotation-message {

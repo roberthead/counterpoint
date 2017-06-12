@@ -9,6 +9,6 @@
       .sandbox__annotation-marks
         - [annotation.marks].flatten.each do |mark|
           .sandbox__annotation-mark
-            = "#{mark.start_position} – #{mark.end_position}"
+            = "#{mark.start_position.bar_number}:#{mark.start_position.count}"
       .sandbox__annotation-fitness= annotation.fitness.round(3)
       .sandbox__annotation-message= annotation.message
