@@ -60,7 +60,7 @@ class Composition < ApplicationRecord
   end
 
   def first_species_counterpoint_issues
-    first_species_counterpoint_annotations.reject(&:perfect?).sort_by(&:start_position)
+    first_species_counterpoint_annotations.reject(&:adherent?).sort_by(&:start_position)
   end
 
   def first_species_counterpoint_annotations
@@ -90,7 +90,7 @@ class Composition < ApplicationRecord
   end
 
   def cantus_firmus_issues
-    cantus_firmus_annotations.reject(&:perfect?).sort_by(&:start_position)
+    cantus_firmus_annotations.reject(&:adherent?).sort_by(&:start_position)
   end
 
   def cantus_firmus_annotations
@@ -99,7 +99,7 @@ class Composition < ApplicationRecord
 
   def cantus_firmus_analysis
     @cantus_firmus_analysis ||=
-      HeadMusic::Style::Analysis.new(HeadMusic::Style::Rulesets::CantusFirmus, head_music_cantus_firmus_voice)
+      HeadMusic::Style::Analysis.new(HeadMusic::Style::Rulesets::FuxCantusFirmus, head_music_cantus_firmus_voice)
   end
 
   def head_music_cantus_firmus_voice
