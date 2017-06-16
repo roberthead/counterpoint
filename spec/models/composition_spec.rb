@@ -75,8 +75,8 @@ RSpec.describe Composition, type: :model do
 
       specify { expect(analysis).to be_a(HeadMusic::Style::Analysis) }
       specify { expect(issues.map(&:message)).to include 'Use only notes in the key signature.' }
-      specify { expect(issues.map(&:message)).to include 'Start on the tonic.' }
-      specify { expect(issues.map(&:message)).to include 'End on the tonic.' }
+      specify { expect(issues.map(&:message)).to include 'Start on the first scale degree.' }
+      specify { expect(issues.map(&:message)).to include 'End on the first scale degree.' }
       specify { expect(issues.length).to be < composition.cantus_firmus_annotations.length }
     end
   end
