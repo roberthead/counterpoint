@@ -43,7 +43,18 @@ ul {
   }
 
   &__content {
+    display: flex;
+  }
+
+  &__flex-content-container {
     margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__flex-content {
+    flex: 1;
+    padding: 1rem;
   }
 }
 
@@ -52,6 +63,10 @@ ul {
     &__container {
       min-width: $width-tablet-portrait;
       max-width: $width-tablet-landscape * 0.90;
+    }
+
+    &__flex-content-container {
+      flex-direction: row;
     }
   }
 }

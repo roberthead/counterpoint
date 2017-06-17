@@ -40,7 +40,16 @@ class SandboxesController < ApplicationController
   private
 
   def ensure_voice
-    params[:voice] =~ /cantus.?firmus/i ? ensure_composition.cantus_firmus : ensure_composition.counterpoint_voice
+    composition = ensure_composition
+    if params[:voice] =~ /counterpoint/i
+      composition.counterpoint_voice
+    elsif params[:voice] =~ /cantus_firmus/i
+      composition.cantus_firmus
+    elsif composition.cantus_firmus_fitness == 1
+      composition.counterpoint_voice
+    else
+      composition.cantus_firmus
+    end
   end
 
   def ensure_composition

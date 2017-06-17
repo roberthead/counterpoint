@@ -4,12 +4,28 @@ en:
   homes:
     show:
       welcome_header: Welcome!
-      welcome_message: Juxtacompose is an application for live analysis of counterpoint.
-      call_to_action: Get started with the counterpoint sandbox.
+      welcome_message_html: >
+        <p>
+          <em>Juxtacompose</em> is an application for real-time analysis of counterpoint composition.
+        </p>
+        <p>
+          Counterpoint is the interplay of multiple melodic lines that has a harmonic effect.
+        </p>
+          Historically, there are two main styles of traditional counterpoint — sixteenth-century (Renaissance) counterpoint, exemplified by Palestrina, and eighteenth-century (Baroque) counterpoint, exemplified by J. S. Bach. The technique is, consequently, of interest to students of classical music and to composers.
+        </p>
+
+        <p>
+          Johann Joseph Fux published a seminal pedagogical work on the topic of counterpoint in 1725 called <span class="work-title">Gradus ad Parnassum</span>. This book introduced 'species counterpoint', which is a series of five compositional exercises in which a <span class="foreign-word">cantus firmus</span> (a 'fixed song' or starting melody) is provided and the student writes a counterpoint line against it.
+        </p>
+
+        <p>
+          Click the button to play with first species counterpoint. As you create, the page will give you real-time feedback on the adherence of the music to the guidelines of traditional first species counterpoint.
+        </p>
+      call_to_action: Write some counterpoint!
   layouts:
     top_nav:
       about: About
-      compositions: Compositions
+      compositions: Compose!
       home: Home
       sign_in: Sign in
       sign_out: Sign out

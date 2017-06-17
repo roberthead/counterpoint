@@ -10,8 +10,9 @@
             = link_to_unless_current(t('.home'), home_path, class: 'top-nav__menu-link')
           %li.top-nav__menu-list-item
             = link_to_unless_current(t('.compositions'), sandbox_path, class: 'top-nav__menu-link')
-          %li.top-nav__menu-list-item
-            = link_to_unless_current(t('.about'), about_path, class: 'top-nav__menu-link')
+          - if false
+            %li.top-nav__menu-list-item
+              = link_to_unless_current(t('.about'), about_path, class: 'top-nav__menu-link')
           %li.top-nav__menu-list-item
             - if current_identity
               = link_to t('.sign_out'), signout_path, id: "sign_out", class: 'top-nav__menu-link'

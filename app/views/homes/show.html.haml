@@ -1,7 +1,10 @@
-.page__content
-  %h2.welcome-header
-    = t('.welcome_header')
-  %p.welcome-message
-    = t('.welcome_message')
-  %p.call-to-action
-    = link_to(t('.call_to_action'), sandbox_path)
+.page__flex-content-container
+  .page__flex-content
+    %h2.welcome-header
+      = t('.welcome_header')
+    .welcome-message
+      = t('.welcome_message_html').html_safe
+    .button.call-to-action
+      = link_to(t('.call_to_action'), sandbox_path)
+  .page__flex-content
+    .piano-background

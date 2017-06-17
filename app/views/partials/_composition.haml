@@ -5,7 +5,7 @@
   .sandbox__voice
     - if @sandbox.voice_cantus_firmus?
       = t('.entering_cantus_firmus')
-      = link_to t('.enter_counterpoint'), sandbox_path, class: 'button'
+      = link_to t('.enter_counterpoint'), sandbox_path, class: 'button form-widget'
     - else
       = t('.entering_counterpoint')
-      = link_to t('.enter_cantus_firmus'), sandbox_path(voice: 'cantus_firmus'), class: 'button'
+      = link_to t('.enter_cantus_firmus'), sandbox_path(voice: 'cantus_firmus'), class: 'button form-widget'

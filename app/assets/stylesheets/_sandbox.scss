@@ -8,6 +8,7 @@ $counterpoint-color: rgba(mui-color("blue", "500"), 50%);
 
 .sandbox {
   &__score {
+    min-width: 40rem;
     width: 100%;
     border-collapse: collapse;
     border: 0;
