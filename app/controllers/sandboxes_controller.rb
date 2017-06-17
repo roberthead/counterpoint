@@ -1,6 +1,8 @@
 class SandboxesController < ApplicationController
   before_action :ensure_authentication!
 
+  layout "sandbox"
+
   class SandboxView
     include ActiveModel::Model
 

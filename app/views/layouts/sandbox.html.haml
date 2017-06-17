@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title
+      = t(:name, scope: [:site])
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    :css
+      @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond');
+  %body#juxtacompose
+    .page__spread
+      = render partial: 'layouts/top_nav'
+      = render partial: 'layouts/messages', locals: {messages: flash}
+      %main.page__container.page__container--sandbox
+        = yield
