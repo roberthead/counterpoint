@@ -23,13 +23,12 @@ class Identity < ApplicationRecord
   has_one :composition, -> { order 'updated_at DESC' }, inverse_of: :identity
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |identity|
-      identity.provider = auth.provider
-      identity.uid = auth.uid
-      identity.name = auth.info.name
-      identity.oauth_token = auth.credentials.token
-      identity.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      identity.save!
-    end
+    where(provider: auth.provider, uid: auth.uid).first_or_create(
+      provider: auth.provider,
+      uid: auth.uid,
+      name: auth.info.name,
+      oauth_token: auth.credentials.token,
+      oauth_expires_at: Time.zone.at(auth.credentials.expires_at)
+    )
   end
 end

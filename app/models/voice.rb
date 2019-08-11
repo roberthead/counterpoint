@@ -18,6 +18,14 @@ class Voice < ApplicationRecord
 
   has_many :notes, inverse_of: :voice, dependent: :destroy
 
+  def self.counterpoint
+    where(cantus_firmus: false)
+  end
+
+  def self.ordered
+    order(:vertical_position)
+  end
+
   def highest_bar
     notes.map(&:bar).select(&:present?).max || 1
   end

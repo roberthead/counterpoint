@@ -4,7 +4,7 @@ class CompositionsController < ApplicationController
   before_action :ensure_authentication!
 
   def update
-    composition.update_attributes(composition_params)
+    composition.update(composition_params)
     redirect_back(fallback_location: root_path)
   end
 

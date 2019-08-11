@@ -12,10 +12,10 @@
 #  updated_at :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :note do
     voice
-    bar 1
-    pitch 'C4'
+    bar { 1 }
+    pitch { 'C4' }
   end
 end

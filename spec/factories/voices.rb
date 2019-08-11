@@ -13,11 +13,11 @@
 #  updated_at        :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :voice do
     composition
     sequence(:vertical_position, 1)
-    cantus_firmus false
-    clef 'treble'
+    cantus_firmus { false }
+    clef { 'treble' }
   end
 end

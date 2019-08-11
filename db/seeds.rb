@@ -13,7 +13,11 @@
   { key_signature: 'E phrygian', pitches: %w[E4 C4 D4 C4 A3 A4 G4 E4 F4 E4] },
   { key_signature: 'F lydian', pitches: %w[F4 G4 A4 F4 D4 E4 F4 C5 A4 F4 G4 F4] }
 ].each do |fux_cantus_firmus|
-  composition = Composition.where(name: "Fux Example in #{fux_cantus_firmus[:key_signature]}", key_signature: fux_cantus_firmus[:key_signature]).first_or_create
+  composition =
+    Composition.where(
+      name: "Fux Example in #{fux_cantus_firmus[:key_signature]}",
+      key_signature: fux_cantus_firmus[:key_signature]
+    ).first_or_create
   voice = Voice.where(composition_id: composition.id, cantus_firmus: true).first_or_create
   fux_cantus_firmus[:pitches].each_with_index do |pitch, i|
     voice.notes << Note.new(bar: i + 1, pitch: pitch)

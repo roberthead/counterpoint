@@ -57,6 +57,10 @@ class SandboxesController < ApplicationController
   end
 
   def ensure_composition
-    current_identity.composition || Composition.create(identity: current_identity, name: t('compositions.default_name', user_name: current_identity.name))
+    current_identity.composition ||
+      Composition.create(
+        identity: current_identity,
+        name: t('compositions.default_name', user_name: current_identity.name)
+      )
   end
 end

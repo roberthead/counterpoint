@@ -14,12 +14,12 @@
 #  updated_at       :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :identity do
-    provider 'google_oauth2'
+    provider { 'google_oauth2' }
     sequence(:uid) { |n| "abc-#{n}" }
     name { Faker::Name.name }
     sequence(:oauth_token) { |n| "xyz-#{n}" }
-    oauth_expires_at { Time.now + 1.hour }
+    oauth_expires_at { Time.zone.now + 1.hour }
   end
 end

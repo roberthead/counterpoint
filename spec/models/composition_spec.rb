@@ -28,17 +28,17 @@ RSpec.describe Composition, type: :model do
     subject(:head_music_composition) { composition.head_music_composition }
 
     context 'when the composition is empty' do
-      let(:composition) { FactoryGirl.create(:composition, key_signature: 'D Major') }
+      let(:composition) { FactoryBot.create(:composition, key_signature: 'D Major') }
 
       it { is_expected.to be_a(HeadMusic::Composition) }
 
       it 'constructs and returns a head_music composition' do
-        expect(subject.key_signature.spellings.map(&:to_s)).to eq %w[D E F# G A B C#]
+        expect(head_music_composition.key_signature.spellings.map(&:to_s)).to eq %w[D E F# G A B C#]
       end
     end
 
     context 'when the composition has notes' do
-      let(:composition) { FactoryGirl.create(:composition, key_signature: 'D Major') }
+      let(:composition) { FactoryBot.create(:composition, key_signature: 'D Major') }
 
       before do
         %w[D4 E4 F#4 A4 G4 E4 F#4 E4 D4].each_with_index do |pitch, i|
@@ -51,10 +51,13 @@ RSpec.describe Composition, type: :model do
 
       its(:voices) { are_expected.to be_present }
 
-      it 'constructs the voices' do
-        cantus = subject.voices.detect { |voice| voice.role == 'Cantus Firmus' }
+      it 'constructs and identifies the cantus' do
+        cantus = head_music_composition.voices.detect { |voice| voice.role == 'Cantus Firmus' }
         expect(cantus.notes.map { |note| note.pitch.to_s }).to eq %w[D4 E4 F#4 A4 G4 E4 F#4 E4 D4]
-        counterpoint = subject.voices.detect { |voice| voice.role != 'Cantus Firmus' }
+      end
+
+      it 'constructs and identifies the counterpoint voice' do
+        counterpoint = head_music_composition.voices.detect { |voice| voice.role != 'Cantus Firmus' }
         expect(counterpoint.notes.map { |note| note.pitch.to_s }).to eq %w[D5 C#5 A4 C#5 D5 G4 A4 C#5 D5]
       end
     end
@@ -62,7 +65,7 @@ RSpec.describe Composition, type: :model do
 
   describe '#cantus_firmus_analysis' do
     context 'when the composition is imperfect' do
-      let(:composition) { FactoryGirl.create(:composition) }
+      let(:composition) { FactoryBot.create(:composition) }
       let(:analysis) { composition.cantus_firmus_analysis }
       let(:issues) { composition.cantus_firmus_issues }
 
@@ -84,7 +87,7 @@ RSpec.describe Composition, type: :model do
   end
 
   describe 'default values' do
-    let(:composition) { Composition.new }
+    let(:composition) { described_class.new }
 
     it 'defaults key_signature to C major' do
       expect(composition.key_signature).to eq 'C major'
@@ -96,7 +99,7 @@ RSpec.describe Composition, type: :model do
   end
 
   describe 'validation lifecycle' do
-    let(:composition) { FactoryGirl.build(:composition) }
+    let(:composition) { FactoryBot.build(:composition) }
 
     context 'when the composition has no voices' do
       it 'builds a cantus firmus' do
@@ -133,7 +136,7 @@ RSpec.describe Composition, type: :model do
     end
 
     context 'when the composition has two voices' do
-      let!(:composition) { FactoryGirl.create(:composition) }
+      let!(:composition) { FactoryBot.create(:composition) }
 
       it 'is content with the existing cantus firmus' do
         expect do
@@ -144,11 +147,7 @@ RSpec.describe Composition, type: :model do
       end
 
       it 'is content with the existing counterpoint voice' do
-        expect do
-          composition.save!
-        end.not_to change {
-          Voice.where(cantus_firmus: false).count
-        }
+        expect { composition.save! }.not_to change { Voice.where(cantus_firmus: false).count }
       end
     end
   end

@@ -18,9 +18,10 @@ RSpec.describe Note, type: :model do
   it { is_expected.to belong_to :voice }
 
   describe 'normalization' do
-    let(:note) { Note.new(bar: '5', pitch: '78') }
+    let(:note) { described_class.new(bar: '5', pitch: '78') }
+
     it 'converts midi note numbers to spelling' do
-      expect { note.valid? }.to change { note.pitch }.from('78').to('F#5')
+      expect { note.valid? }.to change(note, :pitch).from('78').to('F#5')
     end
   end
 end

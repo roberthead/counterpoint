@@ -20,8 +20,8 @@ RSpec.describe Voice, type: :model do
   it { is_expected.to have_many :notes }
 
   describe '#highest_bar' do
-    context 'for a new voice' do
-      subject(:voice) { Voice.new }
+    context 'with a new voice' do
+      subject(:voice) { described_class.new }
 
       its(:highest_bar) { is_expected.to eq 1 }
 
@@ -36,8 +36,9 @@ RSpec.describe Voice, type: :model do
   end
 
   describe '#role' do
-    let(:voice) { Voice.new(cantus_firmus: cantus_firmus) }
-    subject { voice.role }
+    subject(:role) { voice.role }
+
+    let(:voice) { described_class.new(cantus_firmus: cantus_firmus) }
 
     context 'when cantus_firmus is true' do
       let(:cantus_firmus) { true }

@@ -13,7 +13,7 @@
 #  identity_id   :integer          not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :composition do
     name { Faker::Movies::LordOfTheRings.location }
     identity

@@ -22,35 +22,69 @@ class Composition < ApplicationRecord
   belongs_to :identity
   has_many :voices, -> { order(:vertical_position) }, inverse_of: :composition, dependent: :destroy
   has_one :cantus_firmus, -> { where cantus_firmus: true }, class_name: 'Voice', inverse_of: :composition
-  has_many :counterpoint_voices, -> { where(cantus_firmus: false).order(:vertical_position) }, class_name: 'Voice', inverse_of: :composition
-  has_one :counterpoint_voice, -> { where(cantus_firmus: false).order(:vertical_position) }, class_name: 'Voice', inverse_of: :composition
+  has_many :counterpoint_voices, -> { counterpoint.ordered }, class_name: 'Voice', inverse_of: :composition
+  has_one :counterpoint_voice, -> { counterpoint.ordered }, class_name: 'Voice', inverse_of: :composition
   has_many :notes, through: :voices
 
   before_validation :ensure_defaults
   before_validation :ensure_voices
 
+  delegate :head_music_composition, to: :translation
+
   DEFAULT_KEY_SIGNATURE = 'C major'
   DEFAULT_METER = '4/4'
 
-  def highest_bar
-    voices.map(&:highest_bar).max || 1
-  end
+  class Translation
+    include ActiveModel::Model
 
-  def head_music_composition
-    @head_music_composition ||= begin
-      HeadMusic::Composition.new(name: name, key_signature: key_signature, meter: meter).tap do |hm_composition|
-        hm_composition.add_voice(role: 'Cantus Firmus')
-        hm_cantus_firmus = hm_composition.voices.first
-        cantus_firmus.notes.each do |note|
-          hm_cantus_firmus.place("#{note.bar}:1", :whole, note.pitch)
-        end
-        hm_composition.add_voice(role: 'Counterpoint')
-        hm_counterpoint = hm_composition.voices.last
-        counterpoint_voice.notes.each do |note|
-          hm_counterpoint.place("#{note.bar}:1", :whole, note.pitch)
+    attr_accessor :composition
+
+    delegate :name, :key_signature, :meter, to: :composition
+
+    def head_music_composition
+      translate if @head_music_composition.nil?
+      @head_music_composition
+    end
+
+    private
+
+    def translate
+      initialize_head_music_composition
+      add_cantus_firmus_to_head_music_composition
+      add_counterpoint_voices_to_head_music_composition
+    end
+
+    def initialize_head_music_composition
+      @head_music_composition = HeadMusic::Composition.new(name: name, key_signature: key_signature, meter: meter)
+    end
+
+    def add_cantus_firmus_to_head_music_composition
+      return unless composition.cantus_firmus
+
+      @head_music_composition.add_voice(role: 'Cantus Firmus').tap do |head_music_cantus_firmus|
+        composition.cantus_firmus.notes.each do |note|
+          head_music_cantus_firmus.place("#{note.bar}:1", :whole, note.pitch)
         end
       end
     end
+
+    def add_counterpoint_voices_to_head_music_composition
+      composition.counterpoint_voices.each do |counterpoint_voice|
+        add_counterpoint_voice_to_head_music_composition(counterpoint_voice)
+      end
+    end
+
+    def add_counterpoint_voice_to_head_music_composition(counterpoint_voice)
+      @head_music_composition.add_voice(role: 'counterpoint').tap do |head_music_counterpoint_voice|
+        counterpoint_voice.notes.each do |note|
+          head_music_counterpoint_voice.place("#{note.bar}:1", :whole, note.pitch)
+        end
+      end
+    end
+  end
+
+  def highest_bar
+    voices.map(&:highest_bar).max || 1
   end
 
   def first_species_counterpoint_fitness_percentage
@@ -109,6 +143,10 @@ class Composition < ApplicationRecord
   end
 
   private
+
+  def translation
+    @translation ||= Translation.new(composition: self)
+  end
 
   def ensure_defaults
     self.key_signature ||= DEFAULT_KEY_SIGNATURE

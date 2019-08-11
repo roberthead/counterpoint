@@ -1,5 +1,43 @@
-Style/Encoding:
-  Enabled: false
+require:
+  - rubocop-rspec
+  - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 2.5
+  CacheRootDirectory: tmp/cache
+  Exclude:
+    - 'vendor/**/*'
+    - 'spec/support/**/*'
+    - 'node_modules/**/*'
+    - 'doc/**/*'
+    - 'tmp/**/*'
+    - 'mobile/**/*'
+    - 'db/schema.rb'
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: true
+  Exclude:
+    - 'spec/**/*'
 
 Metrics/LineLength:
   Max: 120
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Gemfile'
+    - 'Guardfile'
+    - 'config/**/*.rb'
+    - 'db/migrate/**/*.rb'
+    - 'lib/tasks/**/*.rake'
+    - 'spec/**/*.rb'
+    - 'app/forms/concierges/flight_request.rb'
+
+RSpec/NestedGroups:
+  Max: 5
+
+Style/Documentation:
+  Enabled: false
+
+Style/MixinUsage:
+  Exclude:
+    - 'bin/**/*'

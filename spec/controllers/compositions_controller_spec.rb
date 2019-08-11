@@ -12,14 +12,14 @@ RSpec.describe CompositionsController, type: :controller do
     end
 
     context 'when an identity is signed in' do
-      let(:identity) { FactoryGirl.create(:identity) }
+      let(:identity) { FactoryBot.create(:identity) }
       let(:session) { { identity_id: identity.id } }
 
       context 'when the composition exists' do
         let(:params) { { id: composition.id, composition: { key_signature: 'D dorian' } } }
 
         context 'when the composition belongs to the current identity' do
-          let(:composition) { FactoryGirl.create(:composition, identity: identity) }
+          let(:composition) { FactoryBot.create(:composition, identity: identity) }
 
           it 'updates the record' do
             expect do
@@ -31,7 +31,7 @@ RSpec.describe CompositionsController, type: :controller do
         end
 
         context 'when the composition does not belong to the current identity' do
-          let(:composition) { FactoryGirl.create(:composition) }
+          let(:composition) { FactoryBot.create(:composition) }
 
           it 'blows up' do
             expect do
