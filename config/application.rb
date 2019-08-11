@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'boot'
 
 require 'rails/all'
@@ -8,7 +10,6 @@ Bundler.require(*Rails.groups)
 
 module Counterpoint
   class Application < Rails::Application
-    
     config.generators do |g|
       g.orm             :active_record
       g.template_engine :haml

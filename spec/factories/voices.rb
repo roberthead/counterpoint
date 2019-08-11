@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: voices
@@ -16,6 +18,6 @@ FactoryGirl.define do
     composition
     sequence(:vertical_position, 1)
     cantus_firmus false
-    clef "treble"
+    clef 'treble'
   end
 end

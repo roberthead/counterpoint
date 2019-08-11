@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CompositionsController < ApplicationController
   before_action :ensure_authentication!
 

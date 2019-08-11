@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
   def create
-    identity = Identity.from_omniauth(request.env["omniauth.auth"])
+    identity = Identity.from_omniauth(request.env['omniauth.auth'])
     session[:identity_id] = identity.id
     redirect_to sandbox_path
   end

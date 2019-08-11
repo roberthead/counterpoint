@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: compositions
@@ -27,8 +29,8 @@ class Composition < ApplicationRecord
   before_validation :ensure_defaults
   before_validation :ensure_voices
 
-  DEFAULT_KEY_SIGNATURE = "C major"
-  DEFAULT_METER = "4/4"
+  DEFAULT_KEY_SIGNATURE = 'C major'
+  DEFAULT_METER = '4/4'
 
   def highest_bar
     voices.map(&:highest_bar).max || 1
@@ -114,11 +116,7 @@ class Composition < ApplicationRecord
   end
 
   def ensure_voices
-    if self.cantus_firmus.nil?
-      self.build_cantus_firmus(cantus_firmus: true, vertical_position: 1)
-    end
-    if counterpoint_voices.none?
-      self.counterpoint_voices.build(vertical_position: 2)
-    end
+    build_cantus_firmus(cantus_firmus: true, vertical_position: 1) if cantus_firmus.nil?
+    counterpoint_voices.build(vertical_position: 2) if counterpoint_voices.none?
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe SandboxesController, type: :controller do
@@ -13,7 +15,7 @@ RSpec.describe SandboxesController, type: :controller do
       let(:identity) { FactoryGirl.create(:identity, name: "Sarah O'Reilly") }
 
       def make_request(identity_id)
-        get :show, params: {}, session: {identity_id: identity_id}
+        get :show, params: {}, session: { identity_id: identity_id }
       end
 
       it 'responds successfully' do

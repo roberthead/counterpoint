@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: identities
@@ -14,7 +16,7 @@
 
 FactoryGirl.define do
   factory :identity do
-    provider "google_oauth2"
+    provider 'google_oauth2'
     sequence(:uid) { |n| "abc-#{n}" }
     name { Faker::Name.name }
     sequence(:oauth_token) { |n| "xyz-#{n}" }

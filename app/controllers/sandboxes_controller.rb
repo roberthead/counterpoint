@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class SandboxesController < ApplicationController
   before_action :ensure_authentication!
 
-  layout "sandbox"
+  layout 'sandbox'
 
   class SandboxView
     include ActiveModel::Model

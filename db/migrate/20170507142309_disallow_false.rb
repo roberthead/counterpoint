@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DisallowFalse < ActiveRecord::Migration[5.1]
   class Composition < ActiveRecord::Base; end
   class Note < ActiveRecord::Base; end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: compositions
@@ -50,9 +52,9 @@ RSpec.describe Composition, type: :model do
       its(:voices) { are_expected.to be_present }
 
       it 'constructs the voices' do
-        cantus = subject.voices.detect { |voice| voice.role == "Cantus Firmus"}
+        cantus = subject.voices.detect { |voice| voice.role == 'Cantus Firmus' }
         expect(cantus.notes.map { |note| note.pitch.to_s }).to eq %w[D4 E4 F#4 A4 G4 E4 F#4 E4 D4]
-        counterpoint = subject.voices.detect { |voice| voice.role != "Cantus Firmus" }
+        counterpoint = subject.voices.detect { |voice| voice.role != 'Cantus Firmus' }
         expect(counterpoint.notes.map { |note| note.pitch.to_s }).to eq %w[D5 C#5 A4 C#5 D5 G4 A4 C#5 D5]
       end
     end
@@ -98,33 +100,33 @@ RSpec.describe Composition, type: :model do
 
     context 'when the composition has no voices' do
       it 'builds a cantus firmus' do
-        expect {
+        expect do
           composition.valid?
-        }.to change {
+        end.to change {
           composition.cantus_firmus.present?
         }.from(false).to(true)
       end
 
       it 'builds a counterpoint voice' do
-        expect {
+        expect do
           composition.valid?
-        }.to change {
+        end.to change {
           composition.counterpoint_voices.size
         }.from(0).to(1)
       end
 
       it 'ensures a cantus firmus' do
-        expect {
+        expect do
           composition.save!
-        }.to change {
+        end.to change {
           Voice.where(cantus_firmus: true).count
         }.by 1
       end
 
       it 'ensures a counterpoint line' do
-        expect {
+        expect do
           composition.save!
-        }.to change {
+        end.to change {
           Voice.where(cantus_firmus: false).count
         }.by 1
       end
@@ -134,17 +136,17 @@ RSpec.describe Composition, type: :model do
       let!(:composition) { FactoryGirl.create(:composition) }
 
       it 'is content with the existing cantus firmus' do
-        expect {
+        expect do
           composition.save!
-        }.not_to change {
+        end.not_to change {
           Voice.where(cantus_firmus: true).count
         }
       end
 
       it 'is content with the existing counterpoint voice' do
-        expect {
+        expect do
           composition.save!
-        }.not_to change {
+        end.not_to change {
           Voice.where(cantus_firmus: false).count
         }
       end

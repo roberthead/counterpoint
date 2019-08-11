@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: compositions
@@ -13,7 +15,7 @@
 
 FactoryGirl.define do
   factory :composition do
-    name { Faker::LordOfTheRings.location }
+    name { Faker::Movies::LordOfTheRings.location }
     identity
   end
 end

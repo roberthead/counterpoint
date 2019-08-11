@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe CompositionsController, type: :controller do
@@ -11,7 +13,7 @@ RSpec.describe CompositionsController, type: :controller do
 
     context 'when an identity is signed in' do
       let(:identity) { FactoryGirl.create(:identity) }
-      let(:session) { {identity_id: identity.id} }
+      let(:session) { { identity_id: identity.id } }
 
       context 'when the composition exists' do
         let(:params) { { id: composition.id, composition: { key_signature: 'D dorian' } } }
@@ -20,9 +22,9 @@ RSpec.describe CompositionsController, type: :controller do
           let(:composition) { FactoryGirl.create(:composition, identity: identity) }
 
           it 'updates the record' do
-            expect {
+            expect do
               patch(:update, params: params, session: session)
-            }.to change {
+            end.to change {
               composition.reload.key_signature
             }.from('C major').to('D dorian')
           end
@@ -32,9 +34,9 @@ RSpec.describe CompositionsController, type: :controller do
           let(:composition) { FactoryGirl.create(:composition) }
 
           it 'blows up' do
-            expect {
+            expect do
               patch(:update, params: params, session: session)
-            }.to raise_error ActiveRecord::RecordNotFound
+            end.to raise_error ActiveRecord::RecordNotFound
           end
         end
       end
@@ -43,9 +45,9 @@ RSpec.describe CompositionsController, type: :controller do
         let(:params) { { id: -1, composition: { key_signature: 'D dorian' } } }
 
         it 'blows up' do
-          expect {
+          expect do
             patch(:update, params: params, session: session)
-          }.to raise_error ActiveRecord::RecordNotFound
+          end.to raise_error ActiveRecord::RecordNotFound
         end
       end
     end

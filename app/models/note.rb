@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: notes
@@ -18,8 +20,6 @@ class Note < ApplicationRecord
   private
 
   def normalize_pitch
-    if pitch == pitch.to_i.to_s
-      self.pitch = HeadMusic::Pitch.get(pitch.to_i).to_s
-    end
+    self.pitch = HeadMusic::Pitch.get(pitch.to_i).to_s if pitch == pitch.to_i.to_s
   end
 end
