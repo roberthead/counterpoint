@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'mui-sass'
 gem 'omniauth-google-oauth2', '~> 0.2.1'
+gem "omniauth-rails_csrf_protection"
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
