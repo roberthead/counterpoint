@@ -33,7 +33,7 @@ RSpec.describe Composition, type: :model do
       it { is_expected.to be_a(HeadMusic::Composition) }
 
       it 'constructs and returns a head_music composition' do
-        expect(head_music_composition.key_signature.spellings.map(&:to_s)).to eq %w[D E F# G A B C#]
+        expect(head_music_composition.key_signature.spellings.map(&:to_s)).to eq %w[D E F♯ G A B C♯]
       end
     end
 
@@ -41,10 +41,10 @@ RSpec.describe Composition, type: :model do
       let(:composition) { FactoryBot.create(:composition, key_signature: 'D Major') }
 
       before do
-        %w[D4 E4 F#4 A4 G4 E4 F#4 E4 D4].each_with_index do |pitch, i|
+        %w[D4 E4 F♯4 A4 G4 E4 F♯4 E4 D4].each_with_index do |pitch, i|
           composition.cantus_firmus.add_note(bar: i + 1, pitch: pitch)
         end
-        %w[D5 C#5 A4 C#5 D5 G4 A4 C#5 D5].each_with_index do |pitch, i|
+        %w[D5 C♯5 A4 C♯5 D5 G4 A4 C♯5 D5].each_with_index do |pitch, i|
           composition.counterpoint_voice.add_note(bar: i + 1, pitch: pitch)
         end
       end
@@ -53,12 +53,12 @@ RSpec.describe Composition, type: :model do
 
       it 'constructs and identifies the cantus' do
         cantus = head_music_composition.voices.detect { |voice| voice.role == 'Cantus Firmus' }
-        expect(cantus.notes.map { |note| note.pitch.to_s }).to eq %w[D4 E4 F#4 A4 G4 E4 F#4 E4 D4]
+        expect(cantus.notes.map { |note| note.pitch.to_s }).to eq %w[D4 E4 F♯4 A4 G4 E4 F♯4 E4 D4]
       end
 
       it 'constructs and identifies the counterpoint voice' do
         counterpoint = head_music_composition.voices.detect { |voice| voice.role != 'Cantus Firmus' }
-        expect(counterpoint.notes.map { |note| note.pitch.to_s }).to eq %w[D5 C#5 A4 C#5 D5 G4 A4 C#5 D5]
+        expect(counterpoint.notes.map { |note| note.pitch.to_s }).to eq %w[D5 C♯5 A4 C♯5 D5 G4 A4 C♯5 D5]
       end
     end
   end
@@ -70,10 +70,10 @@ RSpec.describe Composition, type: :model do
       let(:issues) { composition.cantus_firmus_issues }
 
       before do
-        %w[D4 E4 F#4 A4 G4 E4 F#4 E4 D4].each_with_index do |pitch, i|
+        %w[D4 E4 F♯4 A4 G4 E4 F♯4 E4 D4].each_with_index do |pitch, i|
           composition.cantus_firmus.add_note(bar: i + 1, pitch: pitch)
         end
-        %w[D5 C#5 A4 C#5 D5 G4 A4 C#5 D5].each_with_index do |pitch, i|
+        %w[D5 C♯5 A4 C♯5 D5 G4 A4 C♯5 D5].each_with_index do |pitch, i|
           composition.counterpoint_voice.add_note(bar: i + 1, pitch: pitch)
         end
       end

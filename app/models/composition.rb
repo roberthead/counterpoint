@@ -75,10 +75,9 @@ class Composition < ApplicationRecord
     end
 
     def add_counterpoint_voice_to_head_music_composition(counterpoint_voice)
-      @head_music_composition.add_voice(role: 'counterpoint').tap do |head_music_counterpoint_voice|
-        counterpoint_voice.notes.each do |note|
-          head_music_counterpoint_voice.place("#{note.bar}:1", :whole, note.pitch)
-        end
+      head_music_counterpoint_voice = @head_music_composition.add_voice(role: 'Counterpoint')
+      counterpoint_voice.notes.each do |note|
+        head_music_counterpoint_voice.place("#{note.bar}:1", :whole, note.pitch)
       end
     end
   end
@@ -105,12 +104,12 @@ class Composition < ApplicationRecord
 
   def first_species_melody_analysis
     @first_species_melody_analysis ||=
-      HeadMusic::Style::Analysis.new(HeadMusic::Style::Rulesets::FirstSpeciesMelody, head_music_counterpoint_voice)
+      HeadMusic::Style::Analysis.new(HeadMusic::Style::Guides::FirstSpeciesMelody, head_music_counterpoint_voice)
   end
 
   def first_species_harmony_analysis
     @first_species_harmony_analysis ||=
-      HeadMusic::Style::Analysis.new(HeadMusic::Style::Rulesets::FirstSpeciesHarmony, head_music_counterpoint_voice)
+      HeadMusic::Style::Analysis.new(HeadMusic::Style::Guides::FirstSpeciesHarmony, head_music_counterpoint_voice)
   end
 
   def head_music_counterpoint_voice
@@ -135,7 +134,7 @@ class Composition < ApplicationRecord
 
   def cantus_firmus_analysis
     @cantus_firmus_analysis ||=
-      HeadMusic::Style::Analysis.new(HeadMusic::Style::Rulesets::FuxCantusFirmus, head_music_cantus_firmus_voice)
+      HeadMusic::Style::Analysis.new(HeadMusic::Style::Guides::FuxCantusFirmus, head_music_cantus_firmus_voice)
   end
 
   def head_music_cantus_firmus_voice
