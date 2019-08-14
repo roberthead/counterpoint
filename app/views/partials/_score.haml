@@ -9,7 +9,7 @@
       - accidental = pitch.sign.present?
       - no_flat = pitch.letter_name.name.in?(%w[C F])
       - no_sharp = pitch.letter_name.name.in?(%w[B E])
-      - white_type = no_flat ? 'no-flat' : no_sharp ? 'no-sharp' : 'flat-and-sharp'
+      - white_type = no_flat ? 'no-flat' : (no_sharp ? 'no-sharp' : 'flat-and-sharp')
       %tr.sandbox__pitch{class: "sandbox__pitch--#{accidental ? 'black' : 'white'}"}
         %th.sandbox__pitch-piano-key
           - if accidental.present?
