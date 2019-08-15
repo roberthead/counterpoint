@@ -23,9 +23,9 @@
           - else
             .sandbox__piano-key.sandbox__piano-key--white{class: "sandbox__piano-key--#{white_type}"}
         - (1..[sandbox.highest_bar+1, 8].max).each do |bar|
-          %td.sandbox__pitch-bar{class: "sandbox__pitch-bar--#{cycle('even', 'odd')}" }
-            - note = sandbox.voices.map(&:notes).flatten.detect { |note| note.bar == bar && note.pitch == pitch.name }
+          - note = sandbox.voices.map(&:notes).flatten.detect { |note| note.bar == bar && note.pitch == pitch.name }
+          %td.sandbox__pitch-bar{class: "sandbox__pitch-bar--#{cycle('odd', 'even')}", data: {bar: bar, pitch: pitch.name, voice: note&.voice}}
             - if note.nil?
-              = link_to('', notes_url(note: {bar: bar, pitch: pitch.to_s, voice_id: sandbox.voice_id}), method: :post, class: "sandbox__note-link sandbox__note-link--create")
+              = link_to('', notes_url(note: {bar: bar, pitch: pitch, voice_id: sandbox.voice_id}), method: :post, class: "sandbox__note-link sandbox__note-link--create")
             - else
               = link_to('', note_url(note), method: :delete, class: "sandbox__note-link sandbox__note-link--delete sandbox__note-link--#{note.voice.role.dasherize}")
