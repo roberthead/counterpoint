@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+
+test -z "$(git status --porcelain)" || (echo "Git repo not clean"; exit 1)
+
+rspec
+rubocop
+rails db:seed
+git push origin
+git push heroku develop:master
+heroku run rails db:migrate --app juxtacompose
+heroku run rails db:seed --app juxtacompose
